@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecobike.views.RentedBikeInfoScreenController">
+   <children>
+      <AnchorPane layoutX="-2.0" prefHeight="80.0" prefWidth="900.0" style="-fx-border-color: #ddd;">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="77.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="117.0" layoutY="17.0" text="Xe đang thuê" textFill="#bec913">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <GridPane layoutX="463.0" layoutY="102.0" prefHeight="152.0" prefWidth="403.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0" minWidth="10.0" prefWidth="158.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="233.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Bãi xe thuê">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label text="Giá cọc" GridPane.rowIndex="2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="text2" GridPane.columnIndex="1">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="text9" prefHeight="40.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="text8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Label text="Giá trị" GridPane.rowIndex="1">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane layoutX="463.0" layoutY="254.0" prefHeight="131.0" prefWidth="403.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.800048828125" minWidth="10.0" prefWidth="163.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="240.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Thông tin thêm" GridPane.rowIndex="2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label text="Thời gian thuê">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="text3" GridPane.columnIndex="1">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Label text="Phí" GridPane.rowIndex="1">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="text10" prefHeight="43.0" prefWidth="237.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="6.0" />
+               </padding>
+            </TextField>
+         </children>
+      </GridPane>
+      <TextArea fx:id="textArea" layoutX="463.0" layoutY="385.0" prefHeight="114.0" prefWidth="403.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+      <ImageView fitHeight="457.0" fitWidth="410.0" layoutX="26.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@b.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="109.0" layoutY="508.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="145.0" style="-fx-background-color: #bec913;" text="Quay lại" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button layoutX="376.0" layoutY="508.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="161.0" style="-fx-background-color: #bec913;" text="Tạm dừng" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="returnButton" layoutX="632.0" layoutY="508.0" mnemonicParsing="false" onAction="#pressReturnButton" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: #bec913;" text="Trả xe" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

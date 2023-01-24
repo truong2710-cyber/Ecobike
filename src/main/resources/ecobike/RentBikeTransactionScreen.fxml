@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecobike.views.RentBikeTransactionScreenController">
+   <children>
+      <Pane layoutX="37.0" layoutY="117.0" prefHeight="379.0" prefWidth="817.0">
+         <children>
+            <GridPane layoutY="43.0" prefHeight="294.0" prefWidth="360.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.199951171875" minWidth="10.0" prefWidth="112.1999755859375" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="210.60002441406246" minWidth="10.0" prefWidth="210.60002441406246" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Mã xe:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Loại xe:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="text2" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="text3" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="text5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label text="Người thuê:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="text1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label text="Hoàn tiền:" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane layoutX="382.0" layoutY="43.0" prefHeight="294.0" prefWidth="422.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.199951171875" minWidth="10.0" prefWidth="152.7999755859375" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="222.4000122070312" minWidth="10.0" prefWidth="169.6000244140625" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Thời điểm thuê:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Thời điểm trả:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="text9" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="text4" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label text="Tiền cọc:" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="text10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="text8" prefHeight="43.0" prefWidth="238.0" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label text="Tiền thuê:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
+      <Button fx:id="OK" layoutX="373.0" layoutY="526.0" mnemonicParsing="false" onAction="#processOKClick" style="-fx-background-color: #bec913;" text="Xác nhận" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <AnchorPane prefHeight="80.0" prefWidth="900.0" style="-fx-border-color: #ddd;">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="77.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="117.0" layoutY="17.0" text="Thanh toán" textFill="#bec913">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
