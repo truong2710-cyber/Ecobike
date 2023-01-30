@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class MySQLDB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/ecobike";
     private static final String USER_NAME = "root";
+
+    // CHANGE PASSWORD HERE
     private static final String PASSWORD = "";
     private static Connection conn = getConnection();
 
