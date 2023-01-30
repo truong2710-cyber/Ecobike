@@ -10,7 +10,7 @@ public class ParkingLot {
     private int totalSlots;
     private ArrayList<Bike> bikes;
 
-    public ParkingLot(String ID, String name, String location, int totalSlots) {
+    public ParkingLot(String ID, String location, String name, int totalSlots) {
         this.ID = ID;
         this.name = name;
         this.location = location;
@@ -55,6 +55,9 @@ public class ParkingLot {
         return bikes;
     }
 
+    public int getNumberOfBikes() {
+        return ParkingLotDA.getBikesInParkingLot(ID).size();
+    }
     public void setBikes(ArrayList<Bike> bikes) {
         this.bikes = bikes;
     }

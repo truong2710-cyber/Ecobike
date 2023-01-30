@@ -116,4 +116,13 @@ public class Bike {
     public int getDeposit(){
         return 4 * getPrice() / 10;
     }
+
+    public String convertBikeCodeToBarCode(int bikeCode){
+        if (bikeCode%100<10)
+            return "X0"+bikeCode%100;
+        return "X"+ bikeCode%100;
+    }
+    public String getGeneralInfo(){
+        return convertBikeCodeToBarCode(bikeCode) + " - " + getType();
+    }
 }

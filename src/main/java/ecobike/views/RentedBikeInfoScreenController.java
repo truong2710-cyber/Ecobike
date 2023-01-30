@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,6 +21,9 @@ import java.util.ResourceBundle;
 public class RentedBikeInfoScreenController implements Initializable{
     @FXML
     private Button returnButton;
+
+    @FXML
+    private TextField parkingLot, cost, deposit, rentedTime, totalFee;
     private String rental_id;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -27,6 +31,8 @@ public class RentedBikeInfoScreenController implements Initializable{
     }
     public void init(Bike bike){
         rental_id = BikeDA.getRentalID(bike.getBikeCode());
+        cost.setText(String.valueOf(bike.getPrice()));
+        deposit.setText(String.valueOf(bike.getDeposit()));
         //TODO: get info to show
     }
     public void pressReturnButton() throws IOException {
