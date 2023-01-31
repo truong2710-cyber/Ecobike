@@ -12,7 +12,9 @@ import java.util.ArrayList;
 public class MySQLDB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/ecobike";
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "";
+
+    // CHANGE PASSWORD HERE
+    private static final String PASSWORD = "@Nh142857";
     private static Connection conn = getConnection();
 
     /**

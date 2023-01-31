@@ -66,11 +66,11 @@ public class MainScreenController implements Initializable {
     }
 
     private void handleDoubleClickOnDockList() {
-//        System.out.println("User double on a dock");
-//        String parkInfo = parkingLotView.getSelectionModel().getSelectedItem();
-//        ParkingLot parkingLot = getParkFromString(parkInfo);
-//
-//        showViewDockScreen(parkingLot);
+        System.out.println("User double on a dock");
+        String parkInfo = parkingLotView.getSelectionModel().getSelectedItem();
+        ParkingLot parkingLot = getParkFromString(parkInfo);
+
+        showViewDockScreen(parkingLot);
     }
 
     /**
@@ -95,22 +95,22 @@ public class MainScreenController implements Initializable {
      * @param parkingLot: đối tượng bãi xe chứa thông tin cần hiển thị
      */
     public void showViewDockScreen(ParkingLot parkingLot) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/StationScreen.fxml"));
-//            Parent root = loader.load();
-//
-//            DockScreen viewDockController = loader.getController();
-//
-//            viewDockController.initData(dock);
-//
-//            Stage stage = new Stage();
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.setScene(new Scene(root));
-//            stage.setTitle("ViewDockScreen");
-//            stage.showAndWait();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/StationScreen.fxml"));
+            Parent root = loader.load();
+
+            StationScreenController viewStationController = loader.getController();
+
+            viewStationController.initData(parkingLot);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.setTitle("ViewDockScreen");
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleViewBikeButtonClick(){
