@@ -11,7 +11,7 @@ public class RentBikeScreenController {
     @FXML
     private TextField barcode;
 
-    void handleRentBike(ActionEvent event) {
+    public void handleRentBike() {
         String message = barcode.getText();
         if (message.isEmpty()) {
             NotificationBox.display("NotificationBox", "Vui lòng nhập barcode của xe!");
