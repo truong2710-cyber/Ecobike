@@ -12,7 +12,8 @@ public class BarcodeConverterBoundary {
      */
     public static String convertBarcodeToBikeCode(JsonObject body){
         try {
-            return "202100"+body.get("barcode").getAsString().substring(1);
+            // return "202100"+body.get("barcode").getAsString().substring(1);
+            return body.get("barcode").getAsString();
         } catch (Exception e){
             System.out.println("Không kết nối được API !");
         }

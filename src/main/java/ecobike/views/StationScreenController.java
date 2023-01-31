@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ecobike.views.RentBikeScreenController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -98,8 +97,6 @@ public class StationScreenController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/RentBikeScreen.fxml"));
             Parent root = loader.load();
-
-            RentBikeScreenController rentBikeScreenController = loader.getController();
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

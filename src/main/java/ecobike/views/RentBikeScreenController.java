@@ -1,7 +1,7 @@
 package ecobike.views;
 
+import ecobike.controllers.RentBikeController;
 import ecobike.entities.Bike;
-import ecobike.views.box.NotificationBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -12,11 +12,7 @@ public class RentBikeScreenController {
     private TextField barcode;
 
     public void handleRentBike() {
-        String message = barcode.getText();
-        if (message.isEmpty()) {
-            NotificationBox.display("NotificationBox", "Vui lòng nhập barcode của xe!");
-        } else {
-
-        }
+        RentBikeController rentBikeController = new RentBikeController();
+        rentBikeController.handleRentBike(barcode);
     }
 }
