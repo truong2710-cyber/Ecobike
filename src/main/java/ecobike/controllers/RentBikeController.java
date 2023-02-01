@@ -1,9 +1,11 @@
 package ecobike.controllers;
 
 import ecobike.databaseconnection.MySQLDB;
+import ecobike.entities.ParkingLot;
 import ecobike.subsystems.barcodesubsystem.BarcodeConverterController;
 import ecobike.views.box.NotificationBox;
 import ecobike.views.box.ConfirmBox;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +17,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RentBikeController {
-    public void handleRentBike(TextField barcode) {
+    private ParkingLot parkingLot;
+
+    @FXML
+    private TextField barcode;
+
+    public RentBikeController(ParkingLot parkingLot, TextField barcode) {
+        this.parkingLot = parkingLot;
+        this.barcode = barcode;
+    }
+
+    public RentBikeController() {
+
+    }
+
+    public void handleRentBike() {
         String barcodeString = barcode.getText();
         BarcodeConverterController barcodeConverterController = new BarcodeConverterController();
         if (barcodeString.isEmpty()) {
@@ -24,10 +40,18 @@ public class RentBikeController {
             int bikecode = barcodeConverterController.convertBarcodeToBikeCode(barcodeString);
             String command = "SELECT * FROM bike WHERE id = " + bikecode;
             ArrayList<ArrayList<String>> result = MySQLDB.query(command);
+            System.out.println(result);
             if (result.isEmpty()) {
                 NotificationBox.display("NotificationBox", "Xe không tồn tại!");
+            } else if (result.get(0).get(12).equals("1")) {
+                NotificationBox.display("NotificationBox", "Xe đang được thuê!");
             } else {
-                boolean RentConfirmation = ConfirmBox.display("ConfirmBox", "Thuê xe " + barcodeString + " ?");
+                boolean RentConfirmation;
+                if (!result.get(0).get(11).equals(parkingLot.getID())) {
+                    RentConfirmation = ConfirmBox.display("ConfirmBox", "Xe " + barcodeString + " đang ở bãi xe khác. Bạn có muốn thuê?");
+                } else {
+                    RentConfirmation = ConfirmBox.display("ConfirmBox", "Thuê xe " + barcodeString + " ?");
+                }
 
                 if(RentConfirmation) {
                     try {
@@ -45,5 +69,9 @@ public class RentBikeController {
                 }
             }
         }
+    }
+
+    public void handlePayment() {
+        System.out.println(0);
     }
 }

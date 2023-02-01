@@ -98,6 +98,9 @@ public class StationScreenController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/RentBikeScreen.fxml"));
             Parent root = loader.load();
 
+            RentBikeScreenController rentBikeScreenController = loader.getController();
+            rentBikeScreenController.setParkingLot(parkingLot);
+
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
