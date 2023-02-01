@@ -45,7 +45,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text1" editable="false" prefHeight="42.0" prefWidth="425.0" GridPane.columnIndex="1">
+                        <TextField fx:id="text1" prefHeight="42.0" prefWidth="425.0" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
@@ -54,7 +54,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text2" editable="false" prefHeight="42.0" prefWidth="425.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="text2" prefHeight="42.0" prefWidth="425.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
@@ -63,7 +63,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text3" editable="false" prefHeight="42.0" prefWidth="425.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <TextField fx:id="text3" prefHeight="42.0" prefWidth="425.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
@@ -72,7 +72,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text4" editable="false" prefHeight="53.0" prefWidth="303.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="text4" editable="false" prefHeight="53.0" prefWidth="303.0" text="400" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>

@@ -23,7 +23,7 @@ public class RentBikeScreenController {
     }
 
     public void handleRentBike() {
-        RentBikeController rentBikeController = new RentBikeController(parkingLot, barcode);
-        rentBikeController.handleRentBike();
+        RentBikeController rentBikeController = new RentBikeController(parkingLot);
+        rentBikeController.handleRentBike(barcode.getText());
     }
 }

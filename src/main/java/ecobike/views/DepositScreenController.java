@@ -8,9 +8,18 @@ public class DepositScreenController {
     @FXML
     private TextField text1, text2, text3, text4;
 
+    String bikeID;
+
+    public String getBikeID() {
+        return bikeID;
+    }
+    public void setBikeID(String bikeID) {
+        this.bikeID = bikeID;
+    }
+
     public void handlePayment() {
         RentBikeController rentBikeController = new RentBikeController();
-        rentBikeController.handlePayment();
+        rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), bikeID);
     }
 
 }
