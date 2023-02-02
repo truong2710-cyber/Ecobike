@@ -10,7 +10,7 @@ public class TransactionInfoNotiBox {
             case "00":
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Transaction");
-                if (command.equals("pay")) {
+                if (command.equals("deposit")) {
                     alert.setContentText("Rent bike transaction successfully!");
                 } else if (command.equals("refund")) {
                     alert.setContentText("Rent bike transaction successfully!");

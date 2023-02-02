@@ -1,6 +1,8 @@
 package ecobike.views;
 
 import ecobike.controllers.RentBikeController;
+import ecobike.utils.TransactionInfoNotiBox;
+import ecobike.views.box.NotificationBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -27,7 +29,13 @@ public class DepositScreenController {
     public void handlePayment() {
         RentBikeController rentBikeController = new RentBikeController();
         rentBikeController.setBikeID(bikeID);
-        rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), text5.getText());
+        if (rentBikeController.checkCardOnRental(text1.getText())){
+            NotificationBox.display("Error", "Card is being used in another rental.");
+            return;
+        }
+        String respondCode = rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), text5.getText());
+        TransactionInfoNotiBox.displayNotificationErrorCode(respondCode, "deposit");
+
     }
 
 }
