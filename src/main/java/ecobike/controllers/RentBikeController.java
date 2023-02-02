@@ -98,7 +98,6 @@ public class RentBikeController {
                         Card card = new Card(text1, text2, text3, text5);
                         String respondCode = interbank.processTransaction(card, Integer.parseInt(text4), "deposit", "Refund transaction");
 
-                        respondCode = "00";
                         if (respondCode.equals("00")) {
                             NotificationBox.display("NotificationBox", "Rent request successful!");
 
