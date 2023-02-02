@@ -14,7 +14,7 @@ public class MySQLDB {
     private static final String USER_NAME = "root";
 
     // CHANGE PASSWORD HERE
-    private static final String PASSWORD = "@Nh142857";
+    private static final String PASSWORD = "";
     private static Connection conn = getConnection();
 
     /**
