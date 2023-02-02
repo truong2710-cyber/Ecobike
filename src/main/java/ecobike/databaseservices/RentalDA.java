@@ -56,4 +56,9 @@ public class RentalDA {
         String endTime = MySQLDB.query(command).get(0).get(0);
         return endTime;
     }
+    public static void saveRental(String rentee_id, String bike_id, String cardcode){
+        String command = String.format("INSERT INTO rental(rentee_id, bike_id, cardcode) " +
+                "VALUES (%1$s, '%2$s', '%3$s')", rentee_id, bike_id, cardcode);
+        MySQLDB.execute(command);
+    }
 }

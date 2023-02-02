@@ -16,6 +16,13 @@ public class BikeDA {
         MySQLDB.execute(command);
     }
 
+    public static void updateBikeRentalStatus(String bike_id, String rental_id){
+        String command = String.format("UPDATE bike " +
+                "SET is_rented = '%1$s' WHERE id = '%2$s'"
+                , rental_id, bike_id);
+        MySQLDB.execute(command);
+    }
+
     public static ArrayList<ArrayList<String>> getRentingBikes() {
         String command = "SELECT * FROM bike WHERE is_rented = 1";
         ArrayList<ArrayList<String>> result = MySQLDB.query(command);

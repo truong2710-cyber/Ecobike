@@ -1,6 +1,11 @@
 package ecobike.controllers;
 
 import ecobike.databaseconnection.MySQLDB;
+import ecobike.databaseservices.BikeDA;
+import ecobike.databaseservices.CardDA;
+import ecobike.databaseservices.EventDA;
+import ecobike.databaseservices.PaymentTransactionDA;
+import ecobike.databaseservices.RentalDA;
 import ecobike.entities.ParkingLot;
 import ecobike.subsystems.barcodesubsystem.BarcodeConverterController;
 import ecobike.views.box.NotificationBox;
@@ -86,8 +91,7 @@ public class RentBikeController {
                 ArrayList<ArrayList<String>> cards = MySQLDB.query(command);
                 if (cards.size() == 0) {
                     String expireddate = "2025-01-13";
-                    command = "INSERT INTO card VALUES ('" + text1 + "', '" + text2 + "', '" + text3 + "', '" + expireddate + "')";
-                    MySQLDB.execute(command);
+                    CardDA.saveCardInfo(text1, text2, text3, expireddate);
                 };
 
                 command = "SELECT * FROM event";
@@ -127,19 +131,13 @@ public class RentBikeController {
                         if (depositResult) {
                             NotificationBox.display("NotificationBox", "Rent request successful!");
 
-                            command = "SELECT * FROM rental";
-                            ArrayList<ArrayList<String>> rentals = MySQLDB.query(command);
-                            String rentee_id = "1";
-                            command = "INSERT INTO rental VALUES (" + (rentals.size() + 1) + ", " + rentee_id + ", " + bikeID + ", '" + text1 + "')";
-                            MySQLDB.execute(command);
-                            command = "INSERT INTO event VALUES (" + (events.size() + 1) + ", " + (rentals.size() + 1) + ", '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)) + "', 'start')";
-                            MySQLDB.execute(command);
-                            command = "SELECT * FROM paymenttransaction";
-                            ArrayList<ArrayList<String>> paymenttransactions = MySQLDB.query(command);
-                            command = "INSERT INTO paymenttransaction VALUES (" + (paymenttransactions.size() + 1) + ", " + (rentals.size() + 1) + ", " + text4 + ", '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)) + "', 'deposit')";
-                            MySQLDB.execute(command);
-                            command = "UPDATE bike SET is_rented = 1 WHERE id = " + bikeID + "";
-                            MySQLDB.execute(command);
+                            String renteeID = "1";
+                            RentalDA.saveRental(renteeID, bikeID, text1);
+                            command = "SELECT * FROM ecobike.rental ORDER BY id DESC LIMIT 1";
+                            String rentalID = MySQLDB.query(command).get(0).get(0);
+                            EventDA.saveEvent(rentalID, "start");
+                            PaymentTransactionDA.savePaymentTransaction(rentalID, Integer.parseInt(text4), "deposit");
+                            BikeDA.updateBikeRentalStatus(bikeID, "1");
                         } else {
                             NotificationBox.display("NotificationBox", "Not enough balance");
                         }
