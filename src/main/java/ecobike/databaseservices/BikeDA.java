@@ -4,6 +4,7 @@ import ecobike.databaseconnection.MySQLDB;
 import ecobike.entities.Bike;
 import ecobike.entities.BikeFactory;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,6 +35,13 @@ public class BikeDA {
         ArrayList<String> result = MySQLDB.query(command).get(0);
 
         return BikeFactory.getBike(result);
+    }
+
+    public static ArrayList<ArrayList<String>> getAllBikesByID(String bikeID) {
+        String command = "SELECT * FROM bike WHERE id = " + bikeID;
+        ArrayList<ArrayList<String>> result = MySQLDB.query(command);
+
+        return result;
     }
 
     public static String getRentalID(int bikeID){

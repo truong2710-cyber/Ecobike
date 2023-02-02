@@ -46,8 +46,7 @@ public class RentBikeController {
             NotificationBox.display("NotificationBox", "Enter bike's barcode!");
         } else {
             int bikecode = barcodeConverterController.convertBarcodeToBikeCode(barcode);
-            String command = "SELECT * FROM bike WHERE id = " + bikecode;
-            ArrayList<ArrayList<String>> bikes = MySQLDB.query(command);
+            ArrayList<ArrayList<String>> bikes = BikeDA.getAllBikesByID(String.valueOf(bikecode));
             if (bikes.isEmpty()) {
                 NotificationBox.display("NotificationBox", "Bike does not exist!");
             } else if (bikes.get(0).get(12).equals("1")) {
@@ -60,7 +59,7 @@ public class RentBikeController {
                     RentConfirmation = ConfirmBox.display("ConfirmBox", "Proceed to rent bike " + barcode + "?");
                 }
 
-                if(RentConfirmation) {
+                if (RentConfirmation) {
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/DepositScreen.fxml"));
                         Parent root = loader.load();
@@ -88,16 +87,12 @@ public class RentBikeController {
             // call interbank API -> cardInfoMatched
             boolean cardInfoMatched = true;
             if (cardInfoMatched) {
-                String command = "SELECT * FROM card WHERE cardcode = " + text1;
-                ArrayList<ArrayList<String>> cards = MySQLDB.query(command);
-                if (cards.size() == 0) {
-                    CardDA.saveCardInfo(text1, text2, text3, text5);
-                };
+                String command;
+                CardDA.saveCardInfo(text1, text2, text3, text5);
 
-                command = "SELECT * FROM event";
-                ArrayList<ArrayList<String>> events = MySQLDB.query(command);
+                ArrayList<ArrayList<String>> events = EventDA.getAllEvents();
 
-                Set<String> ongoingRentals = new HashSet<String> ();
+                Set<String> ongoingRentals = new HashSet<>();
                 for (ArrayList<String> event : events) {
                     if (event.get(3).equals("start")) {
                         ongoingRentals.add(event.get(1));
@@ -106,13 +101,7 @@ public class RentBikeController {
                     }
                 }
 
-                command = "SELECT * FROM rental WHERE id in (";
-                for (String ongoingRental : ongoingRentals) {
-                    command += "\"" + ongoingRental + "\"" + ", ";
-                }
-                command = command.substring(0, command.length() - 2);
-                command += ")";
-                ArrayList<ArrayList<String>> ongoingRentalsDB = MySQLDB.query(command);
+                ArrayList<ArrayList<String>> ongoingRentalsDB = RentalDA.getOnGoingRentals(ongoingRentals);
 
                 boolean cardCurrentlyOnRental = false;
                 for (ArrayList<String> ongoingRentalDB : ongoingRentalsDB) {
@@ -132,8 +121,7 @@ public class RentBikeController {
                             NotificationBox.display("NotificationBox", "Rent request successful!");
 
                             RentalDA.saveRental(Integer.toString(Main.user_id), bikeID, text1);
-                            command = "SELECT * FROM ecobike.rental ORDER BY id DESC LIMIT 1";
-                            String rentalID = MySQLDB.query(command).get(0).get(0);
+                            String rentalID = RentalDA.getLastestRentalID();
                             EventDA.saveEvent(rentalID, "start");
                             PaymentTransactionDA.savePaymentTransaction(rentalID, Integer.parseInt(text4), "deposit");
                             BikeDA.updateBikeRentalStatus(bikeID, "1");

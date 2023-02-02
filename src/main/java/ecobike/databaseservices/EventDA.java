@@ -25,6 +25,11 @@ public class EventDA {
                 "VALUES (%1$s, '%2$s', '%3$s')", rental_id, currentTime, type);
         MySQLDB.execute(command);
     }
+
+    public static ArrayList<ArrayList<String>> getAllEvents(){
+        String command = "SELECT * FROM event";
+        return MySQLDB.query(command);
+    }
 //    public static void main(String[] args){
 //        String txt = "2023-01-24T15:27:10";
 //        LocalDateTime returnTime = getRentalStartTime("2");

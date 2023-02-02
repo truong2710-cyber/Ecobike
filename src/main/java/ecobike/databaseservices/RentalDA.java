@@ -5,6 +5,7 @@ import ecobike.entities.Bike;
 import ecobike.entities.BikeFactory;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class RentalDA {
     public static Bike getRentalBike(String rental_id){
@@ -61,4 +62,20 @@ public class RentalDA {
                 "VALUES (%1$s, '%2$s', '%3$s')", rentee_id, bike_id, cardcode);
         MySQLDB.execute(command);
     }
+    public static ArrayList<ArrayList<String>> getOnGoingRentals(Set<String> ongoingRentals){
+        String command = "SELECT * FROM rental WHERE id in (";
+        for (String ongoingRental : ongoingRentals) {
+            command += "\"" + ongoingRental + "\"" + ", ";
+        }
+        command = command.substring(0, command.length() - 2);
+        command += ")";
+        ArrayList<ArrayList<String>> ongoingRentalsDB = MySQLDB.query(command);
+        return ongoingRentalsDB;
+    }
+    public static String getLastestRentalID(){
+        String command = "SELECT * FROM ecobike.rental ORDER BY id DESC LIMIT 1";
+        String rentalID = MySQLDB.query(command).get(0).get(0);
+        return rentalID;
+    }
+
 }
