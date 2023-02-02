@@ -6,8 +6,11 @@ import ecobike.databaseservices.CardDA;
 import ecobike.databaseservices.EventDA;
 import ecobike.databaseservices.PaymentTransactionDA;
 import ecobike.databaseservices.RentalDA;
+import ecobike.entities.Card;
 import ecobike.entities.ParkingLot;
 import ecobike.subsystems.barcodesubsystem.BarcodeConverterController;
+import ecobike.subsystems.interbanksubsystem.IInterbank;
+import ecobike.subsystems.interbanksubsystem.InterbankSubsysController;
 import ecobike.views.box.NotificationBox;
 import ecobike.views.DepositScreenController;
 import ecobike.views.Main;
@@ -87,8 +90,6 @@ public class RentBikeController {
             // call interbank API -> cardInfoMatched
             boolean cardInfoMatched = true;
             if (cardInfoMatched) {
-                CardDA.saveCardInfo(text1, text2, text3, text5);
-
                 ArrayList<ArrayList<String>> events = EventDA.getAllEvents();
 
                 Set<String> ongoingRentals = new HashSet<>();
@@ -115,8 +116,11 @@ public class RentBikeController {
                     boolean DepositConfirmation = ConfirmBox.display("ConfirmBox", "Proceed to deposit?");
                     if (DepositConfirmation) {
                         NotificationBox.display("NotificationBox", "Checking balance... Placing deposit");
-                        boolean depositResult = true; //TODO: interbank?
-                        if (depositResult) {
+                        IInterbank interbank = new InterbankSubsysController();
+                        Card card = new Card(text1, text2, text3, text5);
+                        String respondCode = interbank.processTransaction(card, Integer.parseInt(text4), "deposit", "Refund transaction");
+
+                        if (respondCode.equals("00")) {
                             NotificationBox.display("NotificationBox", "Rent request successful!");
 
                             RentalDA.saveRental(Integer.toString(Main.user_id), bikeID, text1);
@@ -124,8 +128,10 @@ public class RentBikeController {
                             EventDA.saveEvent(rentalID, "start");
                             PaymentTransactionDA.savePaymentTransaction(rentalID, Integer.parseInt(text4), "deposit");
                             BikeDA.updateBikeRentalStatus(bikeID, "1");
+                            CardDA.saveCardInfo(text1, text2, text3, text5);
                         } else {
                             NotificationBox.display("NotificationBox", "Not enough balance");
+                            //TODO: handle other respond codes?
                         }
                     }
                 }
