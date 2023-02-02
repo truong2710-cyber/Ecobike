@@ -24,10 +24,18 @@ public class BikeDA {
         MySQLDB.execute(command);
     }
 
-    public static ArrayList<ArrayList<String>> getRentingBikes() {
-        String command = "SELECT * FROM bike WHERE is_rented = 1";
+    public static ArrayList<Bike> getRentingBikes(int user_id) {
+        String command = "select * from bike join " +
+                "(select bike_id from rental where id in " +
+                "(select rental_id from event " +
+                "where rental_id not in (select rental_id FROM event where type = 'end')) and rentee_id = " + Integer.toString(user_id)  +") as r on bike.id = r.bike_id";
         ArrayList<ArrayList<String>> result = MySQLDB.query(command);
-        return result;
+        ArrayList<Bike> bikes = new ArrayList<>();
+        for (ArrayList<String> row: result){
+            Bike bike = BikeFactory.getBike(row);
+            bikes.add(bike);
+        }
+        return bikes;
     }
 
     public static Bike getBikeByID(String bikeID) {
