@@ -7,12 +7,21 @@ import ecobike.entities.ParkingLot;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 
 import java.io.IOException;
@@ -57,6 +66,43 @@ public class MainScreenController implements Initializable {
             parkingLotView.getItems().add(parkingLot.getGeneralInfo());
         }
 
+        parkingLotView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> stringListView) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String s, boolean b) {
+                        super.updateItem(s, b);
+                        if (s != null) {
+//                            Rectangle rectangle = new Rectangle(100, 20);
+//                            rectangle.setArcHeight(10);
+//                            rectangle.setArcWidth(10);
+//                            rectangle.setFill(Color.DARKCYAN);
+
+                            Label label = new Label(s);
+                            label.setTextFill(Color.BLACK);
+                            label.setFont(Font.font("System",24));
+
+                            VBox vBox = new VBox();
+                            vBox.setPadding(new Insets(10, 10, 10, 10));
+                            vBox.getChildren().addAll(label);
+                            vBox.setStyle("-fx-background-color: lightgrey; -fx-background-radius: 10; -fx-padding: 10;");
+
+                            vBox.setOnMouseClicked(event -> {
+                                if (vBox.getStyle().contains("lightblue")) {
+                                    vBox.setStyle("-fx-background-color: lightgrey; -fx-background-radius: 10; -fx-padding: 10;");
+                                } else {
+                                    vBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10; -fx-padding: 10;");
+                                }
+                            });
+                            StackPane stackPane = new StackPane();
+                            stackPane.getChildren().add(vBox);
+                            setGraphic(stackPane);
+                        }
+                    }
+                };
+            }
+        });
         //listen when user double-click on the parking lot in listview => show ViewParkingLotScreen
         parkingLotView.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2) {
@@ -114,9 +160,9 @@ public class MainScreenController implements Initializable {
     }
 
     public void handleViewBikeButtonClick(){
-        ArrayList<ArrayList<String>> s = BikeDA.getRentingBikes(); //TODO: get correct bike
-        if (s.size() > 0) {
-            String bikeID = s.get(0).get(0);
+        ArrayList<Bike> s = BikeDA.getRentingBikes(Main.user_id);
+        if (s.size() == 1) {
+            String bikeID = Integer.toString(s.get(0).getBikeCode());
             Bike bike = BikeDA.getBikeByID(bikeID);
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/RentedBikeInfoScreen.fxml"));
@@ -124,7 +170,7 @@ public class MainScreenController implements Initializable {
 
                 RentedBikeInfoScreenController viewBikeController = loader.getController();
 
-                viewBikeController.init(bike); // wrong bike lead to wrong rental
+                viewBikeController.init(bike);
 
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -134,8 +180,23 @@ public class MainScreenController implements Initializable {
             }catch (IOException e){
                 e.printStackTrace();
             }
+        } else if (s.size() > 1) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/ListRentedBikeScreen.fxml"));
+                Parent root = loader.load();
 
-        }else{
+                ListRentedBikeScreenController listRentedBikeScreenController = loader.getController();
+
+                listRentedBikeScreenController.init(s);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(root));
+                stage.setTitle("Rented Bike Screen");
+                stage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("No rented bikes available!");
