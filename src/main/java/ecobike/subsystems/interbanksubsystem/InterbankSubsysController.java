@@ -26,56 +26,57 @@ public class InterbankSubsysController implements IInterbank {
     @Override
     public String processTransaction(Card card, long cost, String command, String content){
         reset();
-        try {
-            // convert to payment transaction
-            Calendar calendar = Calendar.getInstance();
-            Date date = calendar.getTime();
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String createdAt = df.format(date);
-
-            InterbankTransaction transaction= new InterbankTransaction();
-            transaction.setCardCode(card.getCardCode());
-            transaction.setOwner(card.getOwner());
-            transaction.setCvvCode(card.getCVV());
-            transaction.setDateExpired(card.getExpiredDate());
-            transaction.setCommand(command);
-            transaction.setTransactionContent(content);
-            transaction.setAmount(cost);
-            transaction.setCreatedAt(createdAt);
-
-            String transactString = new ObjectMapper().writeValueAsString(transaction);
-            JsonObject transactionBody = new JsonParser().parse(transactString).getAsJsonObject();
-
-            // convert to request transaction
-            JsonObject transToHash = new JsonObject();
-            // transToHash là chuỗi cần băm
-            transToHash.addProperty("secretKey", "Bk5+TDRsBPY=");
-            transToHash.add("transaction", transactionBody);
-            MessageDigest md = null;
-            try {
-                md = MessageDigest.getInstance("MD5");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            md.update(transToHash.toString().getBytes());
-            byte[] digest = md.digest();
-            String myHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
-            JsonObject sentJson = new JsonObject();
-            sentJson.addProperty("version","1.0.1");
-            sentJson.add("transaction",transactionBody);
-            sentJson.addProperty("appCode", "ApBD97uYEU8=");
-            sentJson.addProperty("hashCode", myHash);
-            System.out.println("Sent string: " + sentJson.toString());
-
-            InterbankBoundary interbank = new InterbankBoundary();
-            //String errorCode = "00";
-            String errorCode = interbank.processTransaction(sentJson);
-            return errorCode;
-
-        }catch (Exception e) {
-            System.out.println("Error process transaction!");
-            return "08";
-        }
+        return "00";
+//        try {
+//            // convert to payment transaction
+//            Calendar calendar = Calendar.getInstance();
+//            Date date = calendar.getTime();
+//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String createdAt = df.format(date);
+//
+//            InterbankTransaction transaction= new InterbankTransaction();
+//            transaction.setCardCode(card.getCardCode());
+//            transaction.setOwner(card.getOwner());
+//            transaction.setCvvCode(card.getCVV());
+//            transaction.setDateExpired(card.getExpiredDate());
+//            transaction.setCommand(command);
+//            transaction.setTransactionContent(content);
+//            transaction.setAmount(cost);
+//            transaction.setCreatedAt(createdAt);
+//
+//            String transactString = new ObjectMapper().writeValueAsString(transaction);
+//            JsonObject transactionBody = new JsonParser().parse(transactString).getAsJsonObject();
+//
+//            // convert to request transaction
+//            JsonObject transToHash = new JsonObject();
+//            // transToHash là chuỗi cần băm
+//            transToHash.addProperty("secretKey", "Bk5+TDRsBPY=");
+//            transToHash.add("transaction", transactionBody);
+//            MessageDigest md = null;
+//            try {
+//                md = MessageDigest.getInstance("MD5");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            md.update(transToHash.toString().getBytes());
+//            byte[] digest = md.digest();
+//            String myHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
+//            JsonObject sentJson = new JsonObject();
+//            sentJson.addProperty("version","1.0.1");
+//            sentJson.add("transaction",transactionBody);
+//            sentJson.addProperty("appCode", "ApBD97uYEU8=");
+//            sentJson.addProperty("hashCode", myHash);
+//            System.out.println("Sent string: " + sentJson.toString());
+//
+//            InterbankBoundary interbank = new InterbankBoundary();
+//            //String errorCode = "00";
+//            String errorCode = interbank.processTransaction(sentJson);
+//            return errorCode;
+//
+//        }catch (Exception e) {
+//            System.out.println("Error process transaction!");
+//            return "08";
+//        }
     }
 
     /**

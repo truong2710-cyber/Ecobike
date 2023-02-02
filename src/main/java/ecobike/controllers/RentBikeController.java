@@ -14,11 +14,14 @@ import ecobike.views.box.NotificationBox;
 import ecobike.views.Main;
 import ecobike.views.box.ConfirmBox;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class RentBikeController {
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     private ParkingLot parkingLot;
     private String bikeID;
 
@@ -72,8 +75,14 @@ public class RentBikeController {
                 ongoingRentals.remove(event.get(1));
             }
         }
+        if (ongoingRentals.size() == 0){
+            return false;
+        }
 
         ArrayList<ArrayList<String>> ongoingRentalsDB = RentalDA.getOnGoingRentals(ongoingRentals);
+        if (ongoingRentalsDB == null){
+            return false;
+        }
 
         boolean cardCurrentlyOnRental = false;
         for (ArrayList<String> ongoingRentalDB : ongoingRentalsDB) {
@@ -86,17 +95,21 @@ public class RentBikeController {
 
     public String handlePayment(String cardCode, String owner, String cvv, String amount, String expiredDate) {
         try {
+            SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+            expiredDate = myFormat.format(fromUser.parse(expiredDate));
+
             IInterbank interbank = new InterbankSubsysController();
             Card card = new Card(cardCode, owner, cvv, expiredDate);
             String respondCode = interbank.processTransaction(card, Integer.parseInt(amount), "deposit", "Refund transaction");
 
             if (respondCode.equals("00")) {
+                CardDA.saveCardInfo(cardCode, owner, cvv, expiredDate);
                 RentalDA.saveRental(Integer.toString(Main.user_id), bikeID, cardCode);
                 String rentalID = RentalDA.getLastestRentalID();
                 EventDA.saveEvent(rentalID, "start");
                 PaymentTransactionDA.savePaymentTransaction(rentalID, Integer.parseInt(amount), "deposit");
                 BikeDA.updateBikeRentalStatus(bikeID, "1");
-                CardDA.saveCardInfo(cardCode, owner, cvv, expiredDate);
             }
             return respondCode;
 
