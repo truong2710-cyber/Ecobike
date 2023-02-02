@@ -19,7 +19,8 @@ public class DepositScreenController {
 
     public void handlePayment() {
         RentBikeController rentBikeController = new RentBikeController();
-        rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), text5.getText(), bikeID);
+        rentBikeController.setBikeID(bikeID);
+        rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), text5.getText());
     }
 
 }

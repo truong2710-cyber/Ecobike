@@ -1,6 +1,5 @@
 package ecobike.controllers;
 
-import ecobike.databaseconnection.MySQLDB;
 import ecobike.databaseservices.BikeDA;
 import ecobike.databaseservices.CardDA;
 import ecobike.databaseservices.EventDA;
@@ -12,29 +11,24 @@ import ecobike.subsystems.barcodesubsystem.BarcodeConverterController;
 import ecobike.subsystems.interbanksubsystem.IInterbank;
 import ecobike.subsystems.interbanksubsystem.InterbankSubsysController;
 import ecobike.views.box.NotificationBox;
-import ecobike.views.DepositScreenController;
 import ecobike.views.Main;
 import ecobike.views.box.ConfirmBox;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class RentBikeController {
     private ParkingLot parkingLot;
-    private static final String PATTERN = "yyyy-MM-dd HH:mm:ss";
-    
+    private String bikeID;
+
+    public String getBikeID() {
+        return bikeID;
+    }
+    public void setBikeID(String bikeID) {
+        this.bikeID = bikeID;
+    }
+
     public RentBikeController() {
 
     }
@@ -43,47 +37,31 @@ public class RentBikeController {
         this.parkingLot = parkingLot;
     }
 
-    public void handleRentBike(String barcode) {
+    public boolean handleRentBike(String barcode) {
         BarcodeConverterController barcodeConverterController = new BarcodeConverterController();
+        boolean RentConfirmation = false;
         if (barcode.isEmpty()) {
             NotificationBox.display("NotificationBox", "Enter bike's barcode!");
         } else {
             int bikecode = barcodeConverterController.convertBarcodeToBikeCode(barcode);
-            ArrayList<ArrayList<String>> bikes = BikeDA.getAllBikesByID(String.valueOf(bikecode));
+            bikeID = String.valueOf(bikecode);
+            ArrayList<ArrayList<String>> bikes = BikeDA.getAllBikesByID(bikeID);
             if (bikes.isEmpty()) {
                 NotificationBox.display("NotificationBox", "Bike does not exist!");
             } else if (bikes.get(0).get(12).equals("1")) {
                 NotificationBox.display("NotificationBox", "Bike is currently rented!");
             } else {
-                boolean RentConfirmation;
-                if (!bikes.get(0).get(11).equals(parkingLot.getID())) {
-                    RentConfirmation = ConfirmBox.display("ConfirmBox", "Bike " + barcode + " is in another parking lot. Do you want to proceed?");
-                } else {
+                if (bikes.get(0).get(11).equals(parkingLot.getID())) {
                     RentConfirmation = ConfirmBox.display("ConfirmBox", "Proceed to rent bike " + barcode + "?");
-                }
-
-                if (RentConfirmation) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/DepositScreen.fxml"));
-                        Parent root = loader.load();
-
-                        DepositScreenController depositScreenController = loader.getController();
-                        depositScreenController.setBikeID(bikes.get(0).get(0));
-            
-                        Stage stage = new Stage();
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.setScene(new Scene(root));
-                        stage.setTitle("Deposit Screen");
-                        stage.showAndWait();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                } else {
+                    RentConfirmation = ConfirmBox.display("ConfirmBox", "Bike " + barcode + " is in another parking lot. Do you want to proceed?");
                 }
             }
         }
+        return RentConfirmation;
     }
 
-    public void handlePayment(String text1, String text2, String text3, String text4, String text5, String bikeID) {
+    public void handlePayment(String text1, String text2, String text3, String text4, String text5) {
         if (text1.isEmpty() || text2.isEmpty() || text3.isEmpty()) {
             NotificationBox.display("NotificationBox", "Fill mandatory fields!");
         } else {
@@ -120,6 +98,7 @@ public class RentBikeController {
                         Card card = new Card(text1, text2, text3, text5);
                         String respondCode = interbank.processTransaction(card, Integer.parseInt(text4), "deposit", "Refund transaction");
 
+                        respondCode = "00";
                         if (respondCode.equals("00")) {
                             NotificationBox.display("NotificationBox", "Rent request successful!");
 
