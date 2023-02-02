@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class Main extends Application {
+    public static int user_id = 1;
     @Override
     public void start(Stage stage) throws IOException {
         // initialize the scene
