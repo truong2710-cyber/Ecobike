@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 
 public class DepositScreenController {
     @FXML
-    private TextField text1, text2, text3, text4;
+    private TextField text1, text2, text3, text4, text5;
 
     String bikeID;
 
@@ -19,7 +19,7 @@ public class DepositScreenController {
 
     public void handlePayment() {
         RentBikeController rentBikeController = new RentBikeController();
-        rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), bikeID);
+        rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), text5.getText(), bikeID);
     }
 
 }

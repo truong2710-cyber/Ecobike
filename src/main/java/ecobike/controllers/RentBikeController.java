@@ -10,6 +10,7 @@ import ecobike.entities.ParkingLot;
 import ecobike.subsystems.barcodesubsystem.BarcodeConverterController;
 import ecobike.views.box.NotificationBox;
 import ecobike.views.DepositScreenController;
+import ecobike.views.Main;
 import ecobike.views.box.ConfirmBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,7 +81,7 @@ public class RentBikeController {
         }
     }
 
-    public void handlePayment(String text1, String text2, String text3, String text4, String bikeID) {
+    public void handlePayment(String text1, String text2, String text3, String text4, String text5, String bikeID) {
         if (text1.isEmpty() || text2.isEmpty() || text3.isEmpty()) {
             NotificationBox.display("NotificationBox", "Fill mandatory fields!");
         } else {
@@ -90,8 +91,7 @@ public class RentBikeController {
                 String command = "SELECT * FROM card WHERE cardcode = " + text1;
                 ArrayList<ArrayList<String>> cards = MySQLDB.query(command);
                 if (cards.size() == 0) {
-                    String expireddate = "2025-01-13";
-                    CardDA.saveCardInfo(text1, text2, text3, expireddate);
+                    CardDA.saveCardInfo(text1, text2, text3, text5);
                 };
 
                 command = "SELECT * FROM event";
@@ -131,8 +131,7 @@ public class RentBikeController {
                         if (depositResult) {
                             NotificationBox.display("NotificationBox", "Rent request successful!");
 
-                            String renteeID = "1";
-                            RentalDA.saveRental(renteeID, bikeID, text1);
+                            RentalDA.saveRental(Integer.toString(Main.user_id), bikeID, text1);
                             command = "SELECT * FROM ecobike.rental ORDER BY id DESC LIMIT 1";
                             String rentalID = MySQLDB.query(command).get(0).get(0);
                             EventDA.saveEvent(rentalID, "start");
@@ -143,8 +142,7 @@ public class RentBikeController {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 NotificationBox.display("NotificationBox", "Wrong card info!");
             }
         }

@@ -34,9 +34,10 @@
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.60001831054694" minWidth="10.0" prefWidth="374.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="77.59998168945313" minHeight="0.0" prefHeight="32.799993896484374" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="60.79999999999999" minHeight="9.600018310546858" prefHeight="54.40000610351562" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
@@ -67,12 +68,21 @@
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số tiền" GridPane.rowIndex="3">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày hết hạn:" GridPane.rowIndex="3">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text4" editable="false" prefHeight="53.0" prefWidth="303.0" text="400" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="text5" prefHeight="42.0" prefWidth="425.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font></TextField>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số tiền" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="text4" editable="false" prefHeight="53.0" prefWidth="303.0" text="400" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
