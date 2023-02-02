@@ -17,6 +17,13 @@ public class DepositScreenController {
         this.bikeID = bikeID;
     }
 
+    public TextField getText4() {
+        return text4;
+    }
+    public void setText4(TextField text4) {
+        this.text4 = text4;
+    }
+
     public void handlePayment() {
         RentBikeController rentBikeController = new RentBikeController();
         rentBikeController.setBikeID(bikeID);

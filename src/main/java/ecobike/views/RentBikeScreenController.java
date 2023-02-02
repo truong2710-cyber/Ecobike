@@ -3,6 +3,7 @@ package ecobike.views;
 import java.io.IOException;
 
 import ecobike.controllers.RentBikeController;
+import ecobike.databaseservices.BikeDA;
 import ecobike.entities.Bike;
 import ecobike.entities.ParkingLot;
 import javafx.event.ActionEvent;
@@ -39,6 +40,8 @@ public class RentBikeScreenController {
 
                 DepositScreenController depositScreenController = loader.getController();
                 depositScreenController.setBikeID(rentBikeController.getBikeID());
+                Bike bike = BikeDA.getBikeByID(rentBikeController.getBikeID());
+                depositScreenController.getText4().setText(String.valueOf(bike.getDeposit()));
 
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);

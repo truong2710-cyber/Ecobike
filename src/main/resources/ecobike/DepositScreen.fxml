@@ -82,7 +82,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text4" editable="false" prefHeight="53.0" prefWidth="303.0" text="400" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <TextField fx:id="text4" editable="false" prefHeight="53.0" prefWidth="303.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
