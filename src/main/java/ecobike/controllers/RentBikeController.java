@@ -87,7 +87,6 @@ public class RentBikeController {
             // call interbank API -> cardInfoMatched
             boolean cardInfoMatched = true;
             if (cardInfoMatched) {
-                String command;
                 CardDA.saveCardInfo(text1, text2, text3, text5);
 
                 ArrayList<ArrayList<String>> events = EventDA.getAllEvents();
@@ -116,7 +115,7 @@ public class RentBikeController {
                     boolean DepositConfirmation = ConfirmBox.display("ConfirmBox", "Proceed to deposit?");
                     if (DepositConfirmation) {
                         NotificationBox.display("NotificationBox", "Checking balance... Placing deposit");
-                        boolean depositResult = true;
+                        boolean depositResult = true; //TODO: interbank?
                         if (depositResult) {
                             NotificationBox.display("NotificationBox", "Rent request successful!");
 
