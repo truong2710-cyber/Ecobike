@@ -73,7 +73,7 @@ public class RentalDatabaseService {
         return ongoingRentalsDB;
     }
     public static String getLastestRentalID(){
-        String command = "SELECT * FROM ecobike.rental ORDER BY id DESC LIMIT 1";
+        String command = "SELECT * FROM rental ORDER BY id DESC LIMIT 1";
         String rentalID = MySQLConnector.query(command).get(0).get(0);
         return rentalID;
     }
