@@ -5,25 +5,25 @@ public class Bike {
     protected String type;
     protected String name;
     protected String country;
-    protected String date_of_manufacture;
+    protected String dateOfManufacture;
     protected String color;
     protected int price;
-    protected String license_place_number;
-    protected int slot_id;
-    protected int park_id;
-    protected boolean is_rented;
-    public Bike(int bikeCode, String type, String name, String country, String date_of_manufacture, String color, int price, String license_place_number, int slot_id, int park_id, boolean is_rented) {
+    protected String licensePlateNumber;
+    protected int slotId;
+    protected int parkId;
+    protected boolean isRented;
+    public Bike(int bikeCode, String type, String name, String country, String dateOfManufacture, String color, int price, String licensePlateNumber, int slotId, int parkId, boolean isRented) {
         this.bikeCode = bikeCode;
         this.type = type;
         this.name = name;
         this.country = country;
-        this.date_of_manufacture = date_of_manufacture;
+        this.dateOfManufacture = dateOfManufacture;
         this.color = color;
         this.price = price;
-        this.license_place_number = license_place_number;
-        this.slot_id = slot_id;
-        this.park_id = park_id;
-        this.is_rented = is_rented;
+        this.licensePlateNumber = licensePlateNumber;
+        this.slotId = slotId;
+        this.parkId = parkId;
+        this.isRented = isRented;
     }
     public int getBikeCode() {
         return bikeCode;
@@ -57,12 +57,12 @@ public class Bike {
         this.country = country;
     }
 
-    public String getDate_of_manufacture() {
-        return date_of_manufacture;
+    public String getDateOfManufacture() {
+        return dateOfManufacture;
     }
 
-    public void setDate_of_manufacture(String date_of_manufacture) {
-        this.date_of_manufacture = date_of_manufacture;
+    public void setDateOfManufacture(String dateOfManufacture) {
+        this.dateOfManufacture = dateOfManufacture;
     }
 
     public String getColor() {
@@ -81,36 +81,36 @@ public class Bike {
         this.price = price;
     }
 
-    public String getLicense_place_number() {
-        return license_place_number;
+    public String getLicensePlateNumber() {
+        return licensePlateNumber;
     }
 
-    public void setLicense_place_number(String license_place_number) {
-        this.license_place_number = license_place_number;
+    public void setLicensePlateNumber(String licensePlateNumber) {
+        this.licensePlateNumber = licensePlateNumber;
     }
 
-    public int getSlot_id() {
-        return slot_id;
+    public int getSlotId() {
+        return slotId;
     }
 
-    public void setSlot_id(int slot_id) {
-        this.slot_id = slot_id;
+    public void setSlotId(int slotId) {
+        this.slotId = slotId;
     }
 
-    public int getPark_id() {
-        return park_id;
+    public int getParkId() {
+        return parkId;
     }
 
-    public void setPark_id(int park_id) {
-        this.park_id = park_id;
+    public void setParkId(int parkId) {
+        this.parkId = parkId;
     }
 
-    public boolean isIs_rented() {
-        return is_rented;
+    public boolean isRented() {
+        return isRented;
     }
 
-    public void setIs_rented(boolean is_rented) {
-        this.is_rented = is_rented;
+    public void setRented(boolean isRented) {
+        this.isRented = isRented;
     }
 
     public int getDeposit(){

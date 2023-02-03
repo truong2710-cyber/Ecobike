@@ -11,19 +11,19 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Cửa sổ yêu cầu người dùng xác nhận
+ * Box for confirmation
  */
 public class ConfirmBox {
     private static boolean answer;
 
-
     /**
-     * Hiển thị cửa sổ yêu cầu người dùng xác nhận
-     * @param title: tiêu đề của cửa sổ
-     * @param message: nội dung yêu cầu người dùng xác nhận
-     * @return kết quả xác nhận của người dùng
+     * Display confirmation box
+     *
+     * @param title:   box title
+     * @param message: box message
+     * @return confirm result
      */
-    public  static boolean display(String title, String message){
+    public static boolean display(String title, String message) {
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);
@@ -42,8 +42,8 @@ public class ConfirmBox {
 
 
         yesButton.setOnAction(e -> {
-           answer = true;
-           window.close();
+            answer = true;
+            window.close();
         });
 
         noButton.setOnAction(e -> {
@@ -57,7 +57,7 @@ public class ConfirmBox {
         hBox.setAlignment(Pos.CENTER);
         Label label1 = new Label();
         label1.setText("EcoBike System");
-        layout.getChildren().addAll(label1, label,hBox, region1);
+        layout.getChildren().addAll(label1, label, hBox, region1);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
         window.setScene(scene);
@@ -66,9 +66,6 @@ public class ConfirmBox {
 
         return answer;
     }
-
-
-
 
 
 }

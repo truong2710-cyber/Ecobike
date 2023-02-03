@@ -14,7 +14,7 @@ public class Main extends Application {
     public static int user_id = 3;
     @Override
     public void start(Stage stage) throws IOException {
-        // initialize the scene
+        // Initialize the scene
         Parent root = FXMLLoader.load(getClass().getResource("/ecobike/SplashScreen.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -34,9 +34,7 @@ public class Main extends Application {
 
         // After fade in, start fade out
         fadeIn.play();
-        fadeIn.setOnFinished((e) -> {
-            fadeOut.play();
-        });
+        fadeIn.setOnFinished((e) -> fadeOut.play());
 
         // After fade out, load actual content
         fadeOut.setOnFinished((e) -> {

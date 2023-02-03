@@ -1,6 +1,6 @@
 package ecobike.entities;
 
-import ecobike.databaseservices.ParkingLotDA;
+import ecobike.database_services.ParkingLotDatabaseService;
 import java.util.ArrayList;
 
 public class ParkingLot {
@@ -51,12 +51,12 @@ public class ParkingLot {
     }
 
     public ArrayList<Bike> getBikes() {
-        bikes = ParkingLotDA.getBikesInParkingLot(ID);
+        bikes = ParkingLotDatabaseService.getBikesInParkingLot(ID);
         return bikes;
     }
 
     public int getNumberOfBikes() {
-        return ParkingLotDA.getBikesInParkingLot(ID).size();
+        return ParkingLotDatabaseService.getBikesInParkingLot(ID).size();
     }
     public void setBikes(ArrayList<Bike> bikes) {
         this.bikes = bikes;

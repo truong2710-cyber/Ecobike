@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 public class Event {
     private String id;
-    private String rental_id;
+    private String rentalId;
     private LocalDateTime time;
     private String type;
 
-    public Event(String id, String rental_id, LocalDateTime time, String type) {
+    public Event(String id, String rentalId, LocalDateTime time, String type) {
         this.id = id;
-        this.rental_id = rental_id;
+        this.rentalId = rentalId;
         this.time = time;
         this.type = type;
     }
@@ -23,12 +23,12 @@ public class Event {
         this.id = id;
     }
 
-    public String getRental_id() {
-        return rental_id;
+    public String getRentalId() {
+        return rentalId;
     }
 
-    public void setRental_id(String rental_id) {
-        this.rental_id = rental_id;
+    public void setRentalId(String rentalId) {
+        this.rentalId = rentalId;
     }
 
     public LocalDateTime getTime() {

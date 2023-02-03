@@ -2,14 +2,14 @@ package ecobike.entities;
 import java.time.LocalDateTime;
 public class PaymentTransaction {
     private String id;
-    private String rental_id;
+    private String rentalId;
     private int amount;
     private LocalDateTime time;
     private String type;
 
-    public PaymentTransaction(String id, String rental_id, int amount, LocalDateTime time, String type) {
+    public PaymentTransaction(String id, String rentalId, int amount, LocalDateTime time, String type) {
         this.id = id;
-        this.rental_id = rental_id;
+        this.rentalId = rentalId;
         this.amount = amount;
         this.time = time;
         this.type = type;
@@ -23,12 +23,12 @@ public class PaymentTransaction {
         this.id = id;
     }
 
-    public String getRental_id() {
-        return rental_id;
+    public String getRentalId() {
+        return rentalId;
     }
 
-    public void setRental_id(String rental_id) {
-        this.rental_id = rental_id;
+    public void setRentalId(String rental_id) {
+        this.rentalId = rental_id;
     }
 
     public int getAmount() {

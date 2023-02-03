@@ -1,6 +1,6 @@
 package ecobike.entities;
 
-import ecobike.databaseservices.CardDA;
+import ecobike.database_services.CardDatabaseService;
 
 public class Card {
     private String cardCode;
@@ -48,10 +48,10 @@ public class Card {
     }
 
     public void saveCardInfo(){
-        CardDA.saveCardInfo(cardCode, owner, CVV, expiredDate);
+        CardDatabaseService.saveCardInfo(cardCode, owner, CVV, expiredDate);
     }
 
     public void deleteFromDatabase(){
-        CardDA.deleteCardInfo(this.cardCode);
+        CardDatabaseService.deleteCardInfo(this.cardCode);
     }
 }

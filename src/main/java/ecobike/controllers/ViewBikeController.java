@@ -1,9 +1,9 @@
 package ecobike.controllers;
 
-import ecobike.databaseservices.EventDA;
-import ecobike.databaseservices.RentalDA;
+import ecobike.database_services.EventDatabaseService;
+import ecobike.database_services.RentalDatabaseService;
 import ecobike.entities.Bike;
-import ecobike.utils.CostCalculator;
+import ecobike.utils.CostCalculatorBoundary;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -16,34 +16,33 @@ import javafx.util.Callback;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 
 public class ViewBikeController {
     public static int[] getRentedInfo(String rental_id) {
         LocalDateTime returnTime = LocalDateTime.now();
-        LocalDateTime startTime = EventDA.getRentalStartTime(rental_id);
+        LocalDateTime startTime = EventDatabaseService.getRentalStartTime(rental_id);
         long rentTimeSec = returnTime.toEpochSecond(ZoneOffset.UTC) - startTime.toEpochSecond(ZoneOffset.UTC);
         int rentTime = (int) rentTimeSec / 60 ;
-        Bike bike = RentalDA.getRentalBike(rental_id);
-        CostCalculator costCalculator = new CostCalculator();
-        costCalculator.setCostCalculationMethod(bike);
-        int rentBikeCost = costCalculator.calculateCost(rentTime);
+        Bike bike = RentalDatabaseService.getRentalBike(rental_id);
+        CostCalculatorBoundary costCalculatorBoundary = new CostCalculatorBoundary();
+        costCalculatorBoundary.setCostCalculationMethod(bike);
+        int rentBikeCost = costCalculatorBoundary.calculateCost(rentTime);
         int[] result = {rentTime, rentBikeCost};
         return result;
     }
 
     public static void setupListView(ListView<String> listView) {
-        listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+        listView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<String> call(ListView<String> stringListView) {
-                return new ListCell<String>() {
+                return new ListCell<>() {
                     @Override
                     protected void updateItem(String s, boolean b) {
                         super.updateItem(s, b);
                         if (s != null) {
                             Label label = new Label(s);
                             label.setTextFill(Color.BLACK);
-                            label.setFont(Font.font("System",24));
+                            label.setFont(Font.font("System", 24));
 
                             VBox vBox = new VBox();
                             vBox.setPadding(new Insets(10, 10, 10, 10));

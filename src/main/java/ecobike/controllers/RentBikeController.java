@@ -1,27 +1,27 @@
 package ecobike.controllers;
 
-import ecobike.databaseservices.BikeDA;
-import ecobike.databaseservices.CardDA;
-import ecobike.databaseservices.EventDA;
-import ecobike.databaseservices.PaymentTransactionDA;
-import ecobike.databaseservices.RentalDA;
+import ecobike.database_services.BikeDatabaseService;
+import ecobike.database_services.CardDatabaseService;
+import ecobike.database_services.EventDatabaseService;
+import ecobike.database_services.PaymentTransactionDatabaseService;
+import ecobike.database_services.RentalDatabaseService;
 import ecobike.entities.Card;
 import ecobike.entities.ParkingLot;
-import ecobike.subsystems.barcodesubsystem.BarcodeConverterController;
-import ecobike.subsystems.interbanksubsystem.IInterbank;
-import ecobike.subsystems.interbanksubsystem.InterbankSubsysController;
+import ecobike.subsystems.barcode_subsystem.BarcodeConverterController;
+import ecobike.subsystems.interbank_subsystem.IInterbank;
+import ecobike.subsystems.interbank_subsystem.InterbankController;
 import ecobike.views.box.NotificationBox;
 import ecobike.views.Main;
 import ecobike.views.box.ConfirmBox;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class RentBikeController {
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final String OUTPUT_DATE_FORMAT = "yyyy-MM-dd";
+    private static final String INPUT_DATE_FORMAT = "dd/MM/yyyy";
     private ParkingLot parkingLot;
     private String bikeID;
 
@@ -48,7 +48,7 @@ public class RentBikeController {
         } else {
             int bikecode = barcodeConverterController.convertBarcodeToBikeCode(barcode);
             bikeID = String.valueOf(bikecode);
-            ArrayList<ArrayList<String>> bikes = BikeDA.getAllBikesByID(bikeID);
+            ArrayList<ArrayList<String>> bikes = BikeDatabaseService.getAllBikesByID(bikeID);
             if (bikes.isEmpty()) {
                 NotificationBox.display("NotificationBox", "Bike does not exist!");
             } else if (bikes.get(0).get(12).equals("1")) {
@@ -65,7 +65,7 @@ public class RentBikeController {
     }
 
     public boolean checkCardOnRental(String cardCode){
-        ArrayList<ArrayList<String>> events = EventDA.getAllEvents();
+        ArrayList<ArrayList<String>> events = EventDatabaseService.getAllEvents();
 
         Set<String> ongoingRentals = new HashSet<>();
         for (ArrayList<String> event : events) {
@@ -79,7 +79,7 @@ public class RentBikeController {
             return false;
         }
 
-        ArrayList<ArrayList<String>> ongoingRentalsDB = RentalDA.getOnGoingRentals(ongoingRentals);
+        ArrayList<ArrayList<String>> ongoingRentalsDB = RentalDatabaseService.getOnGoingRentals(ongoingRentals);
         if (ongoingRentalsDB == null){
             return false;
         }
@@ -88,6 +88,7 @@ public class RentBikeController {
         for (ArrayList<String> ongoingRentalDB : ongoingRentalsDB) {
             if (ongoingRentalDB.get(3).equals(cardCode)) {
                 cardCurrentlyOnRental = true;
+                break;
             }
         }
         return cardCurrentlyOnRental;
@@ -95,21 +96,21 @@ public class RentBikeController {
 
     public String handlePayment(String cardCode, String owner, String cvv, String amount, String expiredDate) {
         try {
-            SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
-            SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat fromUser = new SimpleDateFormat(INPUT_DATE_FORMAT);
+            SimpleDateFormat myFormat = new SimpleDateFormat(OUTPUT_DATE_FORMAT);
             expiredDate = myFormat.format(fromUser.parse(expiredDate));
 
-            IInterbank interbank = new InterbankSubsysController();
+            IInterbank interbank = new InterbankController();
             Card card = new Card(cardCode, owner, cvv, expiredDate);
             String respondCode = interbank.processTransaction(card, Integer.parseInt(amount), "deposit", "Refund transaction");
 
             if (respondCode.equals("00")) {
-                CardDA.saveCardInfo(cardCode, owner, cvv, expiredDate);
-                RentalDA.saveRental(Integer.toString(Main.user_id), bikeID, cardCode);
-                String rentalID = RentalDA.getLastestRentalID();
-                EventDA.saveEvent(rentalID, "start");
-                PaymentTransactionDA.savePaymentTransaction(rentalID, Integer.parseInt(amount), "deposit");
-                BikeDA.updateBikeRentalStatus(bikeID, "1");
+                CardDatabaseService.saveCardInfo(cardCode, owner, cvv, expiredDate);
+                RentalDatabaseService.saveRental(Integer.toString(Main.user_id), bikeID, cardCode);
+                String rentalID = RentalDatabaseService.getLastestRentalID();
+                EventDatabaseService.saveEvent(rentalID, "start");
+                PaymentTransactionDatabaseService.savePaymentTransaction(rentalID, Integer.parseInt(amount), "deposit");
+                BikeDatabaseService.updateBikeRentalStatus(bikeID, "1");
             }
             return respondCode;
 

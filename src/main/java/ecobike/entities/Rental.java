@@ -1,27 +1,27 @@
 package ecobike.entities;
 
 public class Rental {
-    private int rentee_id;
-    private int bike_id;
+    private int renteeId;
+    private int bikeId;
 
-    public Rental(int rentee_id, int bike_id) {
-        this.rentee_id = rentee_id;
-        this.bike_id = bike_id;
+    public Rental(int renteeId, int bikeId) {
+        this.renteeId = renteeId;
+        this.bikeId = bikeId;
     }
 
-    public int getRentee_id() {
-        return rentee_id;
+    public int getRenteeId() {
+        return renteeId;
     }
 
-    public void setRentee_id(int rentee_id) {
-        this.rentee_id = rentee_id;
+    public void setRenteeId(int renteeId) {
+        this.renteeId = renteeId;
     }
 
-    public int getBike_id() {
-        return bike_id;
+    public int getBikeId() {
+        return bikeId;
     }
 
-    public void setBike_id(int bike_id) {
-        this.bike_id = bike_id;
+    public void setBikeId(int bikeId) {
+        this.bikeId = bikeId;
     }
 }
