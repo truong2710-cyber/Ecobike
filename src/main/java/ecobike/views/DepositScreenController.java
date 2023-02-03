@@ -4,7 +4,9 @@ import ecobike.controllers.RentBikeController;
 import ecobike.utils.TransactionInfoNotiBox;
 import ecobike.views.box.NotificationBox;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class DepositScreenController {
     @FXML
@@ -12,6 +14,8 @@ public class DepositScreenController {
 
     String bikeID;
 
+    @FXML
+    private Button huy;
     public String getBikeID() {
         return bikeID;
     }
@@ -38,4 +42,8 @@ public class DepositScreenController {
 
     }
 
+    public void back() {
+        Stage stage = (Stage) huy.getScene().getWindow();
+        stage.close();
+    }
 }

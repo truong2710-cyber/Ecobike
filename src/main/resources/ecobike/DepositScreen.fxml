@@ -100,7 +100,7 @@
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="huy" layoutX="752.0" layoutY="38.0" mnemonicParsing="false" style="-fx-background-color: #bec913;" text="Hủy" textFill="WHITE">
+                  <Button fx:id="huy" layoutX="752.0" layoutY="38.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: #bec913;" text="Hủy" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
