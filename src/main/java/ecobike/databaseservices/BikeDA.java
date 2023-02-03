@@ -25,10 +25,10 @@ public class BikeDA {
     }
 
     public static ArrayList<Bike> getRentingBikes(int user_id) {
-        String command = "select * from bike join " +
-                "(select bike_id from rental where id in " +
-                "(select rental_id from event " +
-                "where rental_id not in (select rental_id FROM event where type = 'end')) and rentee_id = " + Integer.toString(user_id)  +") as r on bike.id = r.bike_id";
+        String command = "SELECT * FROM bike JOIN " +
+                "(SELECT bike_id FROM rental WHERE id IN " +
+                "(SELECT rental_id FROM event " +
+                "WHERE rental_id NOT IN (SELECT rental_id FROM event WHERE type = 'end')) AND rentee_id = " + Integer.toString(user_id)  +") AS r ON bike.id = r.bike_id";
         ArrayList<ArrayList<String>> result = MySQLDB.query(command);
         ArrayList<Bike> bikes = new ArrayList<>();
         for (ArrayList<String> row: result){
@@ -53,12 +53,17 @@ public class BikeDA {
     }
 
     public static String getRentalID(int bikeID){
-        String command = "select id from rental where id not in (select distinct rental_id from event where type = 'end') and bike_id = " + Integer.toString(bikeID);
+        String command = "SELECT rental.id " +
+                "FROM bike JOIN rental " +
+                "ON rental.bike_id = bike.id " +
+                "WHERE bike.id = " + bikeID +
+                " AND rental.id NOT IN " +
+                "(SELECT rental.id FROM rental JOIN event ON rental.id = event.rental_id WHERE event.type = 'end')";
         String rental_id = MySQLDB.query(command).get(0).get(0);
 
         return rental_id;
     }
 //    public static void main(String[] args){
-//        updateBikeParkAndStatus(5, "1");
+//        System.out.println(getRentalID(1));
 //    }
 }
