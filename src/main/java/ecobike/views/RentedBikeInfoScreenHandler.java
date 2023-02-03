@@ -50,7 +50,7 @@ public class RentedBikeInfoScreenHandler implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/ReturnBikeScreen.fxml"));
         Parent root = loader.load();
         ReturnBikeScreenHandler returnBikeScreenHandler = loader.getController();
-        ArrayList<ParkingLot> parkingLots = ParkingLotDatabaseService.getAllParkingLots();
+        ArrayList<ParkingLot> parkingLots = ParkingLotDatabaseService.getAllParkingLotsNotFull();
         returnBikeScreenHandler.init(parkingLots, rental_id);
 
         Stage new_stage = new Stage();

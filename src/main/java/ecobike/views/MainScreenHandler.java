@@ -51,7 +51,7 @@ public class MainScreenHandler implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialize main screen");
 
-        parkingLots = ParkingLotDatabaseService.getAllParkingLots();
+        parkingLots = ParkingLotDatabaseService.getAllParkingLotsWithBike();
 
         //show list of parking lots
         for (ParkingLot parkingLot : parkingLots) {
