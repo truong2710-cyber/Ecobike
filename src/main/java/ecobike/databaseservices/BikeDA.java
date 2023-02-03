@@ -63,7 +63,7 @@ public class BikeDA {
 
         return rental_id;
     }
-    public static void main(String[] args){
-        System.out.println(getRentalID(1));
-    }
+//    public static void main(String[] args){
+//        System.out.println(getRentalID(1));
+//    }
 }
