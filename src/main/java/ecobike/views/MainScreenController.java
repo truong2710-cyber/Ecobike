@@ -1,5 +1,6 @@
 package ecobike.views;
 
+import ecobike.controllers.ViewBikeController;
 import ecobike.databaseservices.BikeDA;
 import ecobike.databaseservices.ParkingLotDA;
 import ecobike.entities.Bike;
@@ -66,43 +67,7 @@ public class MainScreenController implements Initializable {
             parkingLotView.getItems().add(parkingLot.getGeneralInfo());
         }
 
-        parkingLotView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-            @Override
-            public ListCell<String> call(ListView<String> stringListView) {
-                return new ListCell<String>() {
-                    @Override
-                    protected void updateItem(String s, boolean b) {
-                        super.updateItem(s, b);
-                        if (s != null) {
-//                            Rectangle rectangle = new Rectangle(100, 20);
-//                            rectangle.setArcHeight(10);
-//                            rectangle.setArcWidth(10);
-//                            rectangle.setFill(Color.DARKCYAN);
-
-                            Label label = new Label(s);
-                            label.setTextFill(Color.BLACK);
-                            label.setFont(Font.font("System",24));
-
-                            VBox vBox = new VBox();
-                            vBox.setPadding(new Insets(10, 10, 10, 10));
-                            vBox.getChildren().addAll(label);
-                            vBox.setStyle("-fx-background-color: lightgrey; -fx-background-radius: 10; -fx-padding: 10;");
-
-                            vBox.setOnMouseClicked(event -> {
-                                if (vBox.getStyle().contains("lightblue")) {
-                                    vBox.setStyle("-fx-background-color: lightgrey; -fx-background-radius: 10; -fx-padding: 10;");
-                                } else {
-                                    vBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10; -fx-padding: 10;");
-                                }
-                            });
-                            StackPane stackPane = new StackPane();
-                            stackPane.getChildren().add(vBox);
-                            setGraphic(stackPane);
-                        }
-                    }
-                };
-            }
-        });
+        ViewBikeController.setupListView(parkingLotView);
         //listen when user double-click on the parking lot in listview => show ViewParkingLotScreen
         parkingLotView.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2) {
@@ -114,9 +79,10 @@ public class MainScreenController implements Initializable {
     private void handleDoubleClickOnDockList() {
         System.out.println("User double on a dock");
         String parkInfo = parkingLotView.getSelectionModel().getSelectedItem();
-        ParkingLot parkingLot = getParkFromString(parkInfo);
-
-        showViewDockScreen(parkingLot);
+        if (parkInfo != null) {
+            ParkingLot parkingLot = getParkFromString(parkInfo);
+            showViewDockScreen(parkingLot);
+        }
     }
 
     /**

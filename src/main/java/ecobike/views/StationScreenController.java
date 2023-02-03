@@ -1,18 +1,23 @@
 package ecobike.views;
 
+import ecobike.controllers.ViewBikeController;
 import ecobike.entities.Bike;
 import ecobike.entities.ParkingLot;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -57,14 +62,17 @@ public class StationScreenController implements Initializable {
             if (!bike.isIs_rented())
                 bikesView.getItems().add(bike.getGeneralInfo());
         }
+
+        ViewBikeController.setupListView(bikesView);
     }
     private void handleClickBike() {
         System.out.println("User click to view bike detail");
         String bikeInfo = bikesView.getSelectionModel().getSelectedItem();
-        Bike bike = getBikeFromString(bikeInfo);
+        if (bikeInfo != null) {
+            Bike bike = getBikeFromString(bikeInfo);
 
-        showDetailBikeScreen(bike);
-
+            showDetailBikeScreen(bike);
+        }
     }
     private void showDetailBikeScreen(Bike bike){
         try {

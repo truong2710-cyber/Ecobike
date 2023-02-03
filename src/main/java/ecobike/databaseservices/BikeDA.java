@@ -53,10 +53,7 @@ public class BikeDA {
     }
 
     public static String getRentalID(int bikeID){
-        String command = "SELECT rental.id " +
-                "FROM bike JOIN rental " +
-                "ON rental.bike_id = bike.id " +
-                "WHERE bike.id = " + bikeID;
+        String command = "select id from rental where id not in (select distinct rental_id from event where type = 'end') and bike_id = " + Integer.toString(bikeID);
         String rental_id = MySQLDB.query(command).get(0).get(0);
 
         return rental_id;

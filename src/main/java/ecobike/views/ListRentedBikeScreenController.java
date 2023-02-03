@@ -1,16 +1,25 @@
 package ecobike.views;
 
+import ecobike.controllers.ViewBikeController;
 import ecobike.databaseservices.BikeDA;
 import ecobike.entities.Bike;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,6 +34,7 @@ public class ListRentedBikeScreenController implements Initializable {
 
     private ArrayList<Bike> bikes;
 
+    public int park_id;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
@@ -37,6 +47,7 @@ public class ListRentedBikeScreenController implements Initializable {
             listRentedBikeView.getItems().add(bike.getGeneralInfo());
         }
 
+        ViewBikeController.setupListView(listRentedBikeView);
         listRentedBikeView.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2) {
                 handleClickRentedBike();
@@ -50,24 +61,26 @@ public class ListRentedBikeScreenController implements Initializable {
     private void handleClickRentedBike() {
         System.out.println("User click view a rented bike");
         String bikeInfo = listRentedBikeView.getSelectionModel().getSelectedItem();
-        Bike s = getBikeFromString(bikeInfo);
-        String bikeID = Integer.toString(s.getBikeCode());
-        Bike bike = BikeDA.getBikeByID(bikeID);
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/RentedBikeInfoScreen.fxml"));
-            Parent root = loader.load();
+        if (bikeInfo != null) {
+            Bike s = getBikeFromString(bikeInfo);
+            String bikeID = Integer.toString(s.getBikeCode());
+            Bike bike = BikeDA.getBikeByID(bikeID);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/RentedBikeInfoScreen.fxml"));
+                Parent root = loader.load();
 
-            RentedBikeInfoScreenController viewBikeController = loader.getController();
+                RentedBikeInfoScreenController viewBikeController = loader.getController();
 
-            viewBikeController.init(bike);
+                viewBikeController.init(bike);
 
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(new Scene(root));
-            stage.setTitle("Rented Bike Screen");
-            stage.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(root));
+                stage.setTitle("Rented Bike Screen");
+                stage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
