@@ -1,4 +1,4 @@
-package ecobike.utils;
+package ecobike.calculator;
 
 public class SingleBikeICostCalculator implements ICostCalculator {
     @Override

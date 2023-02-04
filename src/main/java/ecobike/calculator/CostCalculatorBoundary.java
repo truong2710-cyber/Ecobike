@@ -1,4 +1,4 @@
-package ecobike.utils;
+package ecobike.calculator;
 
 import ecobike.entities.*;
 

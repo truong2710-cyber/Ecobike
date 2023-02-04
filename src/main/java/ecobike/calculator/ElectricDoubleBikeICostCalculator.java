@@ -1,6 +1,6 @@
-package ecobike.utils;
+package ecobike.calculator;
 
-public class ElectricSingleBikeICostCalculator implements ICostCalculator {
+public class ElectricDoubleBikeICostCalculator implements ICostCalculator {
     @Override
     public int calculateCost(int duration) {
         // free if time is smaller than 10 minutes

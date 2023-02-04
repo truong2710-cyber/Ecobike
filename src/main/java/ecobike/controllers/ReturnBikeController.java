@@ -8,7 +8,7 @@ import ecobike.entities.Bike;
 import ecobike.entities.Card;
 import ecobike.subsystems.interbank_subsystem.IInterbank;
 import ecobike.subsystems.interbank_subsystem.InterbankController;
-import ecobike.utils.CostCalculatorBoundary;
+import ecobike.calculator.CostCalculatorBoundary;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

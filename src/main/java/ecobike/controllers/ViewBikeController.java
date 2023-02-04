@@ -3,27 +3,18 @@ package ecobike.controllers;
 import ecobike.database_services.EventDatabaseService;
 import ecobike.database_services.RentalDatabaseService;
 import ecobike.entities.Bike;
-import ecobike.utils.CostCalculatorBoundary;
-import ecobike.views.RentedBikeInfoScreenHandler;
-import javafx.fxml.FXMLLoader;
+import ecobike.calculator.CostCalculatorBoundary;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
