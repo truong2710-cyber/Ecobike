@@ -58,6 +58,10 @@ public class ParkingLot {
     public int getNumberOfBikes() {
         return ParkingLotDatabaseService.getBikesInParkingLot(ID).size();
     }
+
+    public int getNumberOfAvailableBikes() {
+        return ParkingLotDatabaseService.getAvailableBikeInParkingLot(ID).size();
+    }
     public void setBikes(ArrayList<Bike> bikes) {
         this.bikes = bikes;
     }

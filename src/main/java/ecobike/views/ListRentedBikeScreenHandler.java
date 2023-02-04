@@ -17,9 +17,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Show all bike that rented by user for now
+ * The Screen will showed when you click View Rented Bike Info but you is renting more than 1 bike
+ * After you double click one bike in List View Bike, this Screen initialize Rented Bike Infor of that biek
+ *
+ */
 public class ListRentedBikeScreenHandler implements Initializable {
     @FXML
-    private Button returnAllBtn;
+    private Button returnBtn;
 
     @FXML
     private ListView<String> listRentedBikeView;
@@ -29,6 +35,7 @@ public class ListRentedBikeScreenHandler implements Initializable {
     public int park_id;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ViewBikeController.setupButton(returnBtn);
     }
 
     public void init(ArrayList<Bike> bikes) {
@@ -45,11 +52,14 @@ public class ListRentedBikeScreenHandler implements Initializable {
                 handleClickRentedBike();
             }
         });
-    }
-
-    public void returnAll(){
 
     }
+
+    public void back(){
+        Stage stage = (Stage) returnBtn.getScene().getWindow();
+        stage.close();
+    }
+
     private void handleClickRentedBike() {
         System.out.println("User click view a rented bike");
         String bikeInfo = listRentedBikeView.getSelectionModel().getSelectedItem();
@@ -77,6 +87,12 @@ public class ListRentedBikeScreenHandler implements Initializable {
         }
     }
 
+    /**
+     * Get Bike from bike Info String when you clicked in the List View
+     * Iterate all bikes and match 2 general info
+     * @param bikeInfo
+     * @return
+     */
     private Bike getBikeFromString(String bikeInfo) {
         for (Bike bike: this.bikes){
             String s = bike.getGeneralInfo();

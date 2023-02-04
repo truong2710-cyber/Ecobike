@@ -4,20 +4,35 @@ import ecobike.database_services.EventDatabaseService;
 import ecobike.database_services.RentalDatabaseService;
 import ecobike.entities.Bike;
 import ecobike.utils.CostCalculatorBoundary;
+import ecobike.views.RentedBikeInfoScreenHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 public class ViewBikeController {
+    /**
+     * Get rented bike information to show by rental_id
+     * @param rental_id
+     * @return rented Time and rented fee
+     */
     public static int[] getRentedInfo(String rental_id) {
         LocalDateTime returnTime = LocalDateTime.now();
         LocalDateTime startTime = EventDatabaseService.getRentalStartTime(rental_id);
@@ -31,6 +46,10 @@ public class ViewBikeController {
         return result;
     }
 
+    /**
+     * Set up ListView in Screen more prettier
+     * @param listView
+     */
     public static void setupListView(ListView<String> listView) {
         listView.setCellFactory(new Callback<>() {
             @Override
@@ -64,5 +83,29 @@ public class ViewBikeController {
                 };
             }
         });
+    }
+
+    public static String getImageURL(Bike bike) {
+        switch (bike.getType()) {
+            case "single" -> {
+                return "/ecobike/single_bike.jpg";
+            }
+            case "double" -> {
+                return "/ecobike/double_bike.jpg";
+            }
+            case "electric single" -> {
+                return "/ecobike/single_electric.jpg";
+
+            }
+            case "electric double" -> {
+                return "/ecobike/double_electric.png";
+            }
+        }
+        return "";
+    }
+
+    public static void setupButton(Button button) {
+        button.setOnMouseEntered(e -> button.setStyle("-fx-background-color : #c99513; -fx-background-radius: 20"));
+        button.setOnMouseExited(e -> button.setStyle("-fx-background-color :  #bec913; -fx-background-radius: 20"));
     }
 }

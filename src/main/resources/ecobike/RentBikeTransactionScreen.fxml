@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecobike.views.RentBikeTransactionScreenHandler">
    <children>
-      <Pane layoutX="37.0" layoutY="117.0" prefHeight="379.0" prefWidth="817.0">
+      <Pane layoutX="37.0" layoutY="117.0" prefHeight="392.0" prefWidth="846.0">
          <children>
             <GridPane layoutY="43.0" prefHeight="294.0" prefWidth="360.0">
                <columnConstraints>
@@ -38,17 +38,17 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="text2" GridPane.columnIndex="1">
+                  <TextField fx:id="text2" prefHeight="45.0" prefWidth="211.0" GridPane.columnIndex="1">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="text3" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="text3" prefHeight="46.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="text5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="text5" prefHeight="45.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -58,7 +58,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="text1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="text1" prefHeight="45.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -70,7 +70,7 @@
                   </Label>
                </children>
             </GridPane>
-            <GridPane layoutX="382.0" layoutY="43.0" prefHeight="294.0" prefWidth="422.0">
+            <GridPane layoutX="410.0" layoutY="43.0" prefHeight="294.0" prefWidth="422.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.199951171875" minWidth="10.0" prefWidth="152.7999755859375" />
                   <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="222.4000122070312" minWidth="10.0" prefWidth="169.6000244140625" />
@@ -92,12 +92,12 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="text9" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="text9" prefHeight="45.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="text4" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="text4" prefHeight="46.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -107,7 +107,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="text10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="text10" prefHeight="45.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -126,14 +126,14 @@
             </GridPane>
          </children>
       </Pane>
-      <Button fx:id="OK" layoutX="373.0" layoutY="526.0" mnemonicParsing="false" onAction="#processOKClick" style="-fx-background-color: #bec913;" text="Xác nhận" textFill="WHITE">
+      <Button fx:id="OK" layoutX="373.0" layoutY="526.0" mnemonicParsing="false" onAction="#processOKClick" prefHeight="14.0" prefWidth="200.0" style="-fx-background-color: #bec913; -fx-background-radius: 20;" text="Xác nhận" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="22.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <AnchorPane prefHeight="80.0" prefWidth="900.0" style="-fx-border-color: #ddd;">
          <children>
-            <ImageView fitHeight="80.0" fitWidth="77.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo.png" />
                </image>
@@ -145,5 +145,10 @@
             </Label>
          </children>
       </AnchorPane>
+      <Label layoutX="36.0" layoutY="94.0" prefHeight="58.0" prefWidth="826.0" text="Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi !!!">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

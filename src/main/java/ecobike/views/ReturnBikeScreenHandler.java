@@ -1,6 +1,7 @@
 package ecobike.views;
 
 import ecobike.controllers.ReturnBikeController;
+import ecobike.controllers.ViewBikeController;
 import ecobike.database_services.CardDatabaseService;
 import ecobike.entities.Card;
 import ecobike.entities.ParkingLot;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
@@ -28,6 +30,9 @@ public class ReturnBikeScreenHandler implements Initializable {
 
     @FXML
     private ListView<String> parkingLotView;
+
+    @FXML
+    private Button returnBtn;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         System.out.println("default initialize ReturnBikeScreen");
@@ -46,6 +51,9 @@ public class ReturnBikeScreenHandler implements Initializable {
                 handleDoubleClickOnParkingLotList();
             }
         });
+
+        ViewBikeController.setupButton(returnBtn);
+        ViewBikeController.setupListView(parkingLotView);
     }
     public void handleDoubleClickOnParkingLotList(){
         System.out.println("User double click on parking lot list");
@@ -115,5 +123,10 @@ public class ReturnBikeScreenHandler implements Initializable {
     }
     public boolean checkParkingLotFull(ParkingLot parkingLot){
         return parkingLot.getTotalSlots() == parkingLot.getBikes().size();
+    }
+
+    public void back() {
+        Stage stage = (Stage) returnBtn.getScene().getWindow();
+        stage.close();
     }
 }

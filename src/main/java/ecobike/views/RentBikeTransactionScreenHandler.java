@@ -1,6 +1,7 @@
 package ecobike.views;
 
 //import entities.RentBikeTransaction;
+import ecobike.controllers.ViewBikeController;
 import ecobike.database_services.RentalDatabaseService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,6 +26,7 @@ public class RentBikeTransactionScreenHandler {
         text9.setText(RentalDatabaseService.getReturnTime(rental_id));
         text10.setText(String.valueOf(RentalDatabaseService.getDeposit(rental_id)));
         text4.setText(String.valueOf(RentalDatabaseService.getDeposit(rental_id)- RentalDatabaseService.getRefund(rental_id)));
+        ViewBikeController.setupButton(OK);
     }
 
     @FXML

@@ -123,6 +123,6 @@ public class Bike {
         return "X"+ bikeCode%100;
     }
     public String getGeneralInfo(){
-        return convertBikeCodeToBarCode(bikeCode) + " - " + getType();
+        return getLicensePlateNumber() + " - " + getType();
     }
 }

@@ -12,7 +12,7 @@ public class ParkingLotDatabaseService {
         String command = "SELECT p.* " +
                 "FROM (parkinglot AS p " +
                 "JOIN " +
-                "(SELECT DISTINCT park_id FROM bike) AS q " +
+                "(SELECT DISTINCT park_id FROM bike WHERE is_rented = 0) AS q " +
                 "ON p.id = q.park_id) ";
         ArrayList<ArrayList<String>> result = MySQLConnector.query(command);
         ArrayList<ParkingLot> parkingLots = new ArrayList<>();
@@ -56,7 +56,6 @@ public class ParkingLotDatabaseService {
         }
         return bikes;
     }
-
     public static ParkingLot getParkingLotByID(String ID) {
         String command = "SELECT * FROM parkinglot where id  = " + ID;
         ArrayList<ArrayList<String>> result = MySQLConnector.query(command);
@@ -65,6 +64,23 @@ public class ParkingLotDatabaseService {
         ParkingLot parkingLot = new ParkingLot(row.get(0), row.get(1), row.get(2), Integer.parseInt(row.get(3)));
         return parkingLot;
     }
+
+    public static ArrayList<Bike> getAvailableBikeInParkingLot(String ID) {
+        String command = "SELECT bike.* " +
+                "FROM bike JOIN parkinglot " +
+                "ON bike.park_id = parkinglot.id " +
+                "WHERE park_id = " + ID +
+                " and bike.is_rented = 0";
+        ArrayList<ArrayList<String>> result = MySQLConnector.query(command);
+        ArrayList<Bike> bikes = new ArrayList<>();
+        assert result != null;
+        for (ArrayList<String> row : result){
+            Bike bike = BikeFactory.getBike(row);
+            bikes.add(bike);
+        }
+        return bikes;
+    }
+
     public static boolean getBoolean(String value)
     {
         return !value.equals("0");

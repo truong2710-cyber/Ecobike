@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,6 +24,8 @@ import java.util.ResourceBundle;
 
 /**
  * Main Screen after starting the app
+ * Main Screen show list of available station
+ * Initialize Station SCreen when double click one station in List View Station
  */
 public class MainScreenHandler implements Initializable {
     public static boolean reset = false;
@@ -31,6 +34,8 @@ public class MainScreenHandler implements Initializable {
     @FXML
     private ListView<String> parkingLotView;
 
+    @FXML
+    private Button rentedBikeBtn;
     public void handleRentButtonClick() {
         try {
             System.out.println("user click RentBikeButton");
@@ -65,6 +70,7 @@ public class MainScreenHandler implements Initializable {
                 handleDoubleClickOnDockList();
             }
         });
+        ViewBikeController.setupButton(rentedBikeBtn);
     }
 
     private void handleDoubleClickOnDockList() {
@@ -115,6 +121,11 @@ public class MainScreenHandler implements Initializable {
         }
     }
 
+    /**
+     * Purpose: Show rented bike screen
+     * If user rented 1 bike, the system will show directly to Rented Bike Information
+     * If user rented more than 1 bike, the system will show you list of rented bike. Then you choose one bike in list and the sustem show Rented Bike Information
+     */
     public void handleViewBikeButtonClick(){
         ArrayList<Bike> s = BikeDatabaseService.getRentingBikes(Main.user_id);
         if (s.size() == 1) {
@@ -155,10 +166,9 @@ public class MainScreenHandler implements Initializable {
         } else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setContentText("No rented bikes available!");
+            alert.setContentText("Bạn đang không thuê xe");
             alert.showAndWait();
         }
-
     }
 }
 

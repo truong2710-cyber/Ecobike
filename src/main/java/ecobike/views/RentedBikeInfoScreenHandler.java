@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -21,10 +23,13 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 public class RentedBikeInfoScreenHandler implements Initializable{
     @FXML
-    private Button returnButton, returnScreen;
+    private Button returnButton, returnScreen, pauseBtn;
 
     @FXML
     private TextField parkingLot, cost, deposit, rentedTime, totalFee;
+
+    @FXML
+    private ImageView imageView;
     private String rental_id;
 
     @Override
@@ -41,11 +46,17 @@ public class RentedBikeInfoScreenHandler implements Initializable{
         int[] rentedInfo = ViewBikeController.getRentedInfo(rental_id);
         rentedTime.setText(String.valueOf(rentedInfo[0]));
         totalFee.setText(String.valueOf(rentedInfo[1]));
+        String url = ViewBikeController.getImageURL(bike);
+        Image image = new Image(getClass().getResource(url).toExternalForm());
+        imageView.setImage(image);
         //TODO: get info to show
+        ViewBikeController.setupButton(returnButton);
+        ViewBikeController.setupButton(returnScreen);
+        ViewBikeController.setupButton(pauseBtn);
     }
     public void pressReturnButton() throws IOException {
-        Stage stage = (Stage) returnButton.getScene().getWindow();
-        stage.close();
+//        Stage stage = (Stage) returnButton.getScene().getWindow();
+//        stage.close();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ecobike/ReturnBikeScreen.fxml"));
         Parent root = loader.load();

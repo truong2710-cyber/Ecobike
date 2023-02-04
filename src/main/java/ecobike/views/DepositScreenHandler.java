@@ -1,21 +1,33 @@
 package ecobike.views;
 
 import ecobike.controllers.RentBikeController;
+import ecobike.controllers.ViewBikeController;
 import ecobike.views.box.TransactionInfoNotiBox;
 import ecobike.views.box.NotificationBox;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class DepositScreenHandler {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class DepositScreenHandler implements Initializable {
     @FXML
     private TextField text1, text2, text3, text4, text5;
 
     String bikeID;
 
     @FXML
-    private Button huy;
+    private Button huy, xacnhan;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ViewBikeController.setupButton(huy);
+        ViewBikeController.setupButton(xacnhan);
+    }
+
     public String getBikeID() {
         return bikeID;
     }

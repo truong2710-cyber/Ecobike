@@ -1,16 +1,24 @@
 package ecobike.views;
 
+import ecobike.controllers.ViewBikeController;
 import ecobike.entities.Bike;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Show detail Information of Bike
+ * Showed when you double click in one bike from List View Bike of Station Screen
+ * Initialize Rented Bike Information when you double click in one bike in List View Bike
+ */
 public class BikeDetailScreenHandler implements Initializable {
     @FXML
     private TextField bikeCode, bikeType, parkingLot, licensePlate, cost, deposit;
@@ -20,6 +28,9 @@ public class BikeDetailScreenHandler implements Initializable {
 
     @FXML
     private Button okBtn ;
+
+    @FXML
+    private ImageView imageBike;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -33,9 +44,16 @@ public class BikeDetailScreenHandler implements Initializable {
         parkingLot.setText(String.valueOf(bike.getParkId()));
         licensePlate.setText(bike.getLicensePlateNumber());
         deposit.setText(String.valueOf(bike.getDeposit()));
-
+        String url = ViewBikeController.getImageURL(bike);
+        Image image = new Image(getClass().getResource(url).toExternalForm());
+        imageBike.setImage(image);
+        ViewBikeController.setupButton(okBtn);
     }
 
+
+    /**
+     * Return back screen
+     */
     public void back() {
         Stage stage = (Stage) okBtn.getScene().getWindow();
         stage.close();

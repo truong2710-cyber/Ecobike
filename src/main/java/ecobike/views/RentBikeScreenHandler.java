@@ -1,24 +1,38 @@
 package ecobike.views;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import ecobike.controllers.RentBikeController;
+import ecobike.controllers.ViewBikeController;
 import ecobike.database_services.BikeDatabaseService;
 import ecobike.entities.Bike;
 import ecobike.entities.ParkingLot;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class RentBikeScreenHandler {
+public class RentBikeScreenHandler implements Initializable {
     private ParkingLot parkingLot;
 
     @FXML
     private TextField barcode;
+
+    @FXML
+    private Button returnBtn, rentBikeBtn;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ViewBikeController.setupButton(rentBikeBtn);
+        ViewBikeController.setupButton(returnBtn);
+    }
 
     public ParkingLot getParkingLot() {
         return this.parkingLot;
@@ -50,5 +64,9 @@ public class RentBikeScreenHandler {
                 e.printStackTrace();
             }
         }
+    }
+    public void back() {
+        Stage stage = (Stage) returnBtn.getScene().getWindow();
+        stage.close();
     }
 }

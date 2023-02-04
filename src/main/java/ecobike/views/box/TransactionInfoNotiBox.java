@@ -10,9 +10,9 @@ public class TransactionInfoNotiBox {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Transaction");
                 if (command.equals("deposit")) {
-                    alert.setContentText("Rent bike transaction successfully!");
+                    alert.setContentText("Bạn đã thuê xe thành công!");
                 } else if (command.equals("refund")) {
-                    alert.setContentText("Rent bike transaction successfully!");
+                    alert.setContentText("Thanh toán thành công!");
                 }
                 alert.showAndWait();
             }
@@ -42,25 +42,25 @@ public class TransactionInfoNotiBox {
             }
             case "05" -> {
                 Alert error_alert_5 = new Alert(Alert.AlertType.ERROR);
-                error_alert_5.setTitle("Transaction Error");
-                error_alert_5.setContentText("Not enough transaction information!");
+                error_alert_5.setTitle("Lỗi giao dịch");
+                error_alert_5.setContentText("Không có đủ thông tin giao dịch!");
                 error_alert_5.showAndWait();
             }
             case "06" -> {
                 Alert error_alert_6 = new Alert(Alert.AlertType.ERROR);
-                error_alert_6.setTitle("Transaction Error");
+                error_alert_6.setTitle("Lỗi giao dịch");
                 error_alert_6.setContentText("Lack of version information!");
                 error_alert_6.showAndWait();
             }
             case "07" -> {
                 Alert error_alert_7 = new Alert(Alert.AlertType.ERROR);
-                error_alert_7.setTitle("Transaction Error");
-                error_alert_7.setContentText("Invalid amount!");
+                error_alert_7.setTitle("Lỗi giao dịch");
+                error_alert_7.setContentText("Số lượng không hợp lệ!");
                 error_alert_7.showAndWait();
             }
             default -> {
                 Alert error_alert_8 = new Alert(Alert.AlertType.ERROR);
-                error_alert_8.setTitle("Transaction Error");
+                error_alert_8.setTitle("Lỗi giao dịch");
                 error_alert_8.setContentText("404 Not found!");
                 error_alert_8.showAndWait();
             }

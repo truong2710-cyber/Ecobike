@@ -33,8 +33,8 @@ public class ConfirmBox {
         Label label = new Label();
         label.setText(message);
 
-        Button yesButton = new Button("Yes");
-        Button noButton = new Button("No");
+        Button yesButton = new Button("Đồng ý");
+        Button noButton = new Button("Không");
         Region region1 = new Region();
         Region region2 = new Region();
         Region region3 = new Region();
