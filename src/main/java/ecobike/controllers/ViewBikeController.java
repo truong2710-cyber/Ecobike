@@ -31,7 +31,7 @@ public class ViewBikeController {
         int rentTime = (int) rentTimeSec / 60 ;
         Bike bike = RentalDatabaseService.getRentalBike(rental_id);
         CostCalculatorBoundary costCalculatorBoundary = new CostCalculatorBoundary();
-        costCalculatorBoundary.setCostCalculationMethod(bike);
+        costCalculatorBoundary.setCostCalculationStrategy(bike);
         int rentBikeCost = costCalculatorBoundary.calculateCost(rentTime);
         int[] result = {rentTime, rentBikeCost};
         return result;

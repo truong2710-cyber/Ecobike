@@ -23,7 +23,7 @@ public class ReturnBikeController {
         // get bike
         Bike bike = RentalDatabaseService.getRentalBike(rental_id);
         CostCalculatorBoundary costCalculatorBoundary = new CostCalculatorBoundary();
-        costCalculatorBoundary.setCostCalculationMethod(bike);
+        costCalculatorBoundary.setCostCalculationStrategy(bike);
         int rentBikeCost = costCalculatorBoundary.calculateCost((int) rentTime/60);
         long refundAmount = bike.getDeposit() -  rentBikeCost;
 
