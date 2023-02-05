@@ -193,7 +193,7 @@ INSERT INTO `bike` (`id`, `type`, `name`, `country`, `date_of_manufacture`, `col
 (97, 'electric double', 'Bullet', 'UK', '2021-12-26', 'red', 6300000, 91, 72, '30C6-62436', 39, 3, 0),
 (98, 'single', 'Alpha', 'Korea', '2021-11-12', 'red', 3400000, 55, 120, '33T5-82092', 39, 1, 0),
 (99, 'double', 'Tornado', 'Vietnam', '2022-05-14', 'red', 7900000, 60, 144, '33L2-44166', 34, 3, 0),
-(100, 'electric double', 'Flash', 'Vietnam', '2022-07-12', 'red', 6000000, 64, 72, '30X5-48234', 13, 2, 0),
+(100, 'electric double', 'Flash', 'Vietnam', '2022-07-12', 'red', 6000000, 64, 72, '30X5-48234', 13, 2, 0);
 
 -- --------------------------------------------------------
 
