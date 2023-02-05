@@ -41,7 +41,7 @@ public class StationScreenHandler implements Initializable {
     private Button rentBIkeBtn, returnBtn;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Show Station Screen");
+        System.out.println("Show ParkingLot Screen");
 
         bikesView.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2){

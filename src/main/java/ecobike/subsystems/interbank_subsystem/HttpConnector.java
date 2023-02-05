@@ -22,7 +22,7 @@ public class HttpConnector {
                 return response.body().string();
             }
         } catch (Exception e) {
-            System.out.println("Error! (method: sendPatch)");
+            System.out.println("Can not send patch!");
         }
         return null;
     }

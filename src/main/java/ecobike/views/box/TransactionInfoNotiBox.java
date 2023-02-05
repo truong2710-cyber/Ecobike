@@ -8,7 +8,7 @@ public class TransactionInfoNotiBox {
         switch (code) {
             case "00" -> {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Transaction");
+                alert.setTitle("Giao dịch");
                 if (command.equals("deposit")) {
                     alert.setContentText("Bạn đã thuê xe thành công!");
                 } else if (command.equals("refund")) {
@@ -18,38 +18,38 @@ public class TransactionInfoNotiBox {
             }
             case "01" -> {
                 Alert error_alert_1 = new Alert(Alert.AlertType.ERROR);
-                error_alert_1.setTitle("Transaction Error");
-                error_alert_1.setContentText("Invalid card!");
+                error_alert_1.setTitle("Lỗi giao dịch");
+                error_alert_1.setContentText("Thẻ không hợp lệ!");
                 error_alert_1.showAndWait();
             }
             case "02" -> {
                 Alert error_alert_2 = new Alert(Alert.AlertType.ERROR);
-                error_alert_2.setTitle("Transaction Error");
-                error_alert_2.setContentText("Not enough balance!");
+                error_alert_2.setTitle("Lỗi giao dịch");
+                error_alert_2.setContentText("Thẻ không đủ số dư!");
                 error_alert_2.showAndWait();
             }
             case "03" -> {
                 Alert error_alert_3 = new Alert(Alert.AlertType.ERROR);
-                error_alert_3.setTitle("Transaction Error");
-                error_alert_3.setContentText("Internal server error!");
+                error_alert_3.setTitle("Lỗi giao dịch");
+                error_alert_3.setContentText("Lỗi server nội bộ!");
                 error_alert_3.showAndWait();
             }
             case "04" -> {
                 Alert error_alert_4 = new Alert(Alert.AlertType.ERROR);
-                error_alert_4.setTitle("Transaction Error");
-                error_alert_4.setContentText("Suspicious transaction!");
+                error_alert_4.setTitle("Lỗi giao dịch");
+                error_alert_4.setContentText("Giao dịch bị nghi ngờ gian lận!");
                 error_alert_4.showAndWait();
             }
             case "05" -> {
                 Alert error_alert_5 = new Alert(Alert.AlertType.ERROR);
                 error_alert_5.setTitle("Lỗi giao dịch");
-                error_alert_5.setContentText("Không có đủ thông tin giao dịch!");
+                error_alert_5.setContentText("Không đủ thông tin giao dịch!");
                 error_alert_5.showAndWait();
             }
             case "06" -> {
                 Alert error_alert_6 = new Alert(Alert.AlertType.ERROR);
                 error_alert_6.setTitle("Lỗi giao dịch");
-                error_alert_6.setContentText("Lack of version information!");
+                error_alert_6.setContentText("Thiếu thông tin version!");
                 error_alert_6.showAndWait();
             }
             case "07" -> {

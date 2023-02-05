@@ -44,20 +44,20 @@ public class RentBikeController {
         BarcodeConverterController barcodeConverterController = new BarcodeConverterController();
         boolean RentConfirmation = false;
         if (barcode.isEmpty()) {
-            NotificationBox.display("NotificationBox", "Enter bike's barcode!");
+            NotificationBox.display("NotificationBox", "Vui lòng nhập barcode!");
         } else {
             int bikecode = barcodeConverterController.convertBarcodeToBikeCode(barcode);
             bikeID = String.valueOf(bikecode);
             ArrayList<ArrayList<String>> bikes = BikeDatabaseService.getAllBikesByID(bikeID);
             if (bikes.isEmpty()) {
-                NotificationBox.display("NotificationBox", "Bike does not exist!");
+                NotificationBox.display("NotificationBox", "Xe này không tồn tại!");
             } else if (bikes.get(0).get(12).equals("1")) {
-                NotificationBox.display("NotificationBox", "Bike is currently rented!");
+                NotificationBox.display("NotificationBox", "Xe này đang được thuê rồi!");
             } else {
                 if (bikes.get(0).get(11).equals(parkingLot.getID())) {
-                    RentConfirmation = ConfirmBox.display("ConfirmBox", "Proceed to rent bike " + barcode + "?");
+                    RentConfirmation = ConfirmBox.display("ConfirmBox", "Bạn có chắc chắn muốn thê xe có mã " + barcode + " không ạ?");
                 } else {
-                    RentConfirmation = ConfirmBox.display("ConfirmBox", "Bike " + barcode + " is in another parking lot. Do you want to proceed?");
+                    RentConfirmation = ConfirmBox.display("ConfirmBox", "Xe " + barcode + " đang ở một bãi khác. Bạn vẫn muốn thuê chứ?");
                 }
             }
         }

@@ -44,7 +44,7 @@ public class MainScreenHandler implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
-            stage.setTitle("RentBikeScreen");
+            stage.setTitle("Rent Bike Screen");
             stage.showAndWait();
 
         } catch (IOException e) {
@@ -114,7 +114,7 @@ public class MainScreenHandler implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
-            stage.setTitle("ViewDockScreen");
+            stage.setTitle("View ParkingLot Screen");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -166,7 +166,7 @@ public class MainScreenHandler implements Initializable {
         } else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setContentText("Bạn đang không thuê xe");
+            alert.setContentText("Bạn đang không thuê xe!");
             alert.showAndWait();
         }
     }

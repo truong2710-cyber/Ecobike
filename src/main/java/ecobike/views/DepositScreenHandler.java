@@ -46,7 +46,7 @@ public class DepositScreenHandler implements Initializable {
         RentBikeController rentBikeController = new RentBikeController();
         rentBikeController.setBikeID(bikeID);
         if (rentBikeController.checkCardOnRental(text1.getText())){
-            NotificationBox.display("Error", "Card is being used in another rental.");
+            NotificationBox.display("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
             return;
         }
         String respondCode = rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), text5.getText());

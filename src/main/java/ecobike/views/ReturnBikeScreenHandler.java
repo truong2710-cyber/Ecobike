@@ -63,13 +63,13 @@ public class ReturnBikeScreenHandler implements Initializable {
         if(checkParkingLotFull(parkingLot)) {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Error");
-            errorAlert.setContentText("Parking Lot Full!");
+            errorAlert.setContentText("Bãi đỗ này đã đầy!");
             errorAlert.showAndWait();
         }
         else{
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
             confirmAlert.setTitle("Confirm");
-            confirmAlert.setContentText("Are you sure to return the bike?");
+            confirmAlert.setContentText("Bạn có chắc chắn muốn trả xe không ạ?");
             Optional<ButtonType> option = confirmAlert.showAndWait();
             if (option.get() == ButtonType.OK){
                 System.out.println("confirmed Return Bike");
@@ -105,7 +105,7 @@ public class ReturnBikeScreenHandler implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
-            stage.setTitle("RentBikeTransactionInfo");
+            stage.setTitle("RentBike Transaction Info");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
