@@ -2,8 +2,8 @@ package ecobike.views;
 
 import ecobike.controllers.RentBikeController;
 import ecobike.controllers.ViewBikeController;
+import ecobike.views.box.ErrorBox;
 import ecobike.views.box.TransactionInfoNotiBox;
-import ecobike.views.box.NotificationBox;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -46,7 +46,8 @@ public class DepositScreenHandler implements Initializable {
         RentBikeController rentBikeController = new RentBikeController();
         rentBikeController.setBikeID(bikeID);
         if (rentBikeController.checkCardOnRental(text1.getText())){
-            NotificationBox.display("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
+            ErrorBox.show("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
+            //NotificationBox.display("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
             return;
         }
         String respondCode = rentBikeController.handlePayment(text1.getText(), text2.getText(), text3.getText(), text4.getText(), text5.getText());
