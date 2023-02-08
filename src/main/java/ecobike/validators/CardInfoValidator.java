@@ -1,7 +1,5 @@
 package ecobike.validators;
 
-import ecobike.entities.Card;
-import org.junit.Test;
 
 import java.time.LocalDate;
 
