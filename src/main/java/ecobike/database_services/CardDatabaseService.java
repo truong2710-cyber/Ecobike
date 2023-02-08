@@ -3,6 +3,7 @@ package ecobike.database_services;
 import ecobike.database_connection.MySQLConnector;
 import ecobike.entities.Card;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CardDatabaseService {
@@ -35,7 +36,7 @@ public class CardDatabaseService {
                 "ON card.cardcode = rental.cardcode " +
                 "WHERE rental.id = " + rental_id;
         ArrayList<String> card_info = MySQLConnector.query(command).get(0);
-        Card card = new Card(card_info.get(0), card_info.get(1), card_info.get(2), card_info.get(3));
+        Card card = new Card(card_info.get(0), card_info.get(1), card_info.get(2), LocalDate.parse(card_info.get(3)));
         return card;
     }
 

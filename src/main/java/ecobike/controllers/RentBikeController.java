@@ -99,16 +99,16 @@ public class RentBikeController {
 
     public String handlePayment(Card card, String amount) {
         try {
-            SimpleDateFormat fromUser = new SimpleDateFormat(INPUT_DATE_FORMAT);
-            SimpleDateFormat myFormat = new SimpleDateFormat(OUTPUT_DATE_FORMAT);
-            String expiredDate = myFormat.format(fromUser.parse(card.getExpiredDate()));
+//            SimpleDateFormat fromUser = new SimpleDateFormat(INPUT_DATE_FORMAT);
+//            SimpleDateFormat myFormat = new SimpleDateFormat(OUTPUT_DATE_FORMAT);
+//            String expiredDate = String.valueOf(card.getExpiredDate());
 
             IInterbank interbank = new InterbankController();
             InterbankTransaction interbankTransaction = new InterbankTransaction(card, "deposit", "Deposit transaction", Integer.parseInt(amount), LocalDateTime.now());
             String respondCode = interbank.processTransaction(interbankTransaction);
 
             if (respondCode.equals("00")) {
-                CardDatabaseService.saveCardInfo(card.getCardCode(), card.getOwner(), card.getCVV(), card.getExpiredDate());
+                CardDatabaseService.saveCardInfo(card.getCardCode(), card.getOwner(), card.getCVV(), String.valueOf(card.getExpiredDate()));
                 RentalDatabaseService.saveRental(Integer.toString(Main.user_id), bikeID, card.getCardCode());
                 String rentalID = RentalDatabaseService.getLastestRentalID();
                 Rental rental = new Rental(rentalID, bikeID, card.getCardCode());

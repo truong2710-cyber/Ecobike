@@ -2,13 +2,15 @@ package ecobike.entities;
 
 import ecobike.database_services.CardDatabaseService;
 
+import java.time.LocalDate;
+
 public class Card {
     private String cardCode;
     private String owner;
     private String CVV;
-    private String expiredDate;
+    private LocalDate expiredDate;
 
-    public Card(String cardCode, String owner, String CVV, String expiredDate) {
+    public Card(String cardCode, String owner, String CVV, LocalDate expiredDate) {
         this.cardCode = cardCode;
         this.owner = owner;
         this.CVV = CVV;
@@ -39,16 +41,16 @@ public class Card {
         this.CVV = CVV;
     }
 
-    public String getExpiredDate() {
+    public LocalDate getExpiredDate() {
         return expiredDate;
     }
 
-    public void setExpiredDate(String expiredDate) {
+    public void setExpiredDate(LocalDate expiredDate) {
         this.expiredDate = expiredDate;
     }
 
     public void saveCardInfo(){
-        CardDatabaseService.saveCardInfo(cardCode, owner, CVV, expiredDate);
+        CardDatabaseService.saveCardInfo(cardCode, owner, CVV, String.valueOf(expiredDate));
     }
 
     public void deleteFromDatabase(){

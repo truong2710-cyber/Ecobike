@@ -8,6 +8,7 @@ import ecobike.views.box.TransactionInfoNotiBox;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -16,7 +17,10 @@ import java.util.ResourceBundle;
 
 public class DepositScreenHandler implements Initializable {
     @FXML
-    private TextField text1, text2, text3, text4, text5;
+    private TextField text1, text2, text3, text4;
+
+    @FXML
+    private DatePicker datePicker;
 
     String bikeID;
 
@@ -51,7 +55,7 @@ public class DepositScreenHandler implements Initializable {
             //NotificationBox.display("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
             return;
         }
-        Card card = new Card(text1.getText(), text2.getText(), text3.getText(), text5.getText());
+        Card card = new Card(text1.getText(), text2.getText(), text3.getText(), datePicker.getValue());
         String amount = text4.getText();
         String respondCode = rentBikeController.handlePayment(card, amount);
         TransactionInfoNotiBox.displayNotificationErrorCode(respondCode, "deposit");
