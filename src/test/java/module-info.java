@@ -1,4 +1,4 @@
-module validators{
+module test.java.ecobike.validators{
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
@@ -10,6 +10,8 @@ module validators{
     requires junit;
     requires org.junit.jupiter.api;
     requires JUnitParams;
+    requires src.java.ecobike.views;
+    //requires ecobike.views;
 
-    exports validators;
+    exports ecobike.validators_test;
 }

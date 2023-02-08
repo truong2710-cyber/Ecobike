@@ -1,4 +1,4 @@
-module ecobike.views {
+module src.java.ecobike.views {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;

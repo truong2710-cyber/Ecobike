@@ -1,5 +1,6 @@
-package validators;
+package ecobike.validators_test;//package test.java.ecobike.validators;
 
+import ecobike.validators.CardInfoValidator;
 import junitparams.FileParameters;
 import junitparams.Parameters;
 import org.junit.Test;
@@ -19,9 +20,9 @@ public class CardInfoValidatorTest {
             "2|false",
     })
     public void validateCardCode(String cardCode, String expected) {
-        //boolean check = CardInfoValidator
-        Assertions.assertEquals(1,1);
-}
+        boolean check = CardInfoValidator.validateCardCode(cardCode);
+        Assertions.assertEquals(String.valueOf(check),expected);
+    }
 
     @Test
     public void validateOwner() {
