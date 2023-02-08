@@ -1,81 +1,63 @@
 package ecobike.entities;
 
+import java.time.LocalDateTime;
 
 public class InterbankTransaction {
-    private String cardCode;
-    private String owner;
-    private String cvvCode;
-    private String dateExpired;
+    private Card card;
     private String command;
     private String transactionContent;
     private double amount;
-    private String createdAt;  //format: yyyy-mm-đd hour:minute:second
+    private LocalDateTime createdAt;  //format: yyyy-mm-đd hour:minute:second
 
     public InterbankTransaction(){
-
     }
 
-    public String getCardCode() {
-        return cardCode;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setCardCode(String cardCode) {
-        this.cardCode = cardCode;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public void setCvvCode(String cvvCode) {
-        this.cvvCode = cvvCode;
-    }
-
-    public void setDateExpired(String dateExpired) {
-        this.dateExpired = dateExpired;
-    }
-
-    public void setCommand(String command) {
+    public InterbankTransaction(Card card, String command, String transactionContent, double amount, LocalDateTime createdAt) {
+        this.card = card;
         this.command = command;
-    }
-
-    public void setTransactionContent(String transactionContent) {
         this.transactionContent = transactionContent;
-    }
-
-    public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getOwner() {
-        return owner;
+    public Card getCard() {
+        return card;
     }
 
-    public String getCvvCode() {
-        return cvvCode;
-    }
-
-    public String getDateExpired() {
-        return dateExpired;
+    public void setCard(Card card) {
+        this.card = card;
     }
 
     public String getCommand() {
         return command;
     }
 
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
     public String getTransactionContent() {
         return transactionContent;
     }
 
-    public String getCreatedAt() {
+    public void setTransactionContent(String transactionContent) {
+        this.transactionContent = transactionContent;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
+

@@ -2,19 +2,17 @@ package ecobike.subsystems.interbank_subsystem;
 
 import com.google.gson.JsonObject;
 import ecobike.entities.Card;
+import ecobike.entities.InterbankTransaction;
 
 public class InterbankController implements IInterbank {
 
     /**
-     * @param card : Card instance
-     * @param cost : transaction amount
-     * @param command : transaction request {"pay", "refund"}
-     * @param content : transaction content
+     * @param interbankTransaction: transaction object
      * @return : error code returned by API
      */
 
     @Override
-    public String processTransaction(Card card, long cost, String command, String content){
+    public String processTransaction(InterbankTransaction interbankTransaction){
         reset();
         return "00";
 //        try {

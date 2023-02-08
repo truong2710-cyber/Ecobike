@@ -6,6 +6,8 @@ import ecobike.database_services.PaymentTransactionDatabaseService;
 import ecobike.database_services.RentalDatabaseService;
 import ecobike.entities.Bike;
 import ecobike.entities.Card;
+import ecobike.entities.Event;
+import ecobike.entities.InterbankTransaction;
 import ecobike.subsystems.interbank_subsystem.IInterbank;
 import ecobike.subsystems.interbank_subsystem.InterbankController;
 import ecobike.calculator.CostCalculatorBoundary;
@@ -29,18 +31,20 @@ public class ReturnBikeController {
 
         System.out.println("Refund amount: " + refundAmount);
         assert refundAmount > 0;
+        InterbankTransaction interbankTransaction = new InterbankTransaction(card, "refund", "Refund transaction", refundAmount, returnTime);
+        Event event = new Event(rental_id, returnTime, "end");
         IInterbank interbank = new InterbankController();
-        String respondCode = interbank.processTransaction(card, refundAmount, "refund", "Refund transaction");
+        String respondCode = interbank.processTransaction(interbankTransaction);
         System.out.println("respond code: " + respondCode);
         if (respondCode.equals("00")) {
-            saveReturnTransaction(park_id, rental_id, refundAmount, bike.getBikeCode());
+            saveReturnTransaction(park_id, bike.getBikeCode(), event, interbankTransaction);
         }
         return respondCode;
     }
 
-    public static void saveReturnTransaction(String park_id, String rental_id, long amount, int bike_id) {
-        EventDatabaseService.saveEvent(rental_id, "end");
-        PaymentTransactionDatabaseService.savePaymentTransaction(rental_id, amount, "refund");
+    public static void saveReturnTransaction(String park_id, int bike_id, Event event, InterbankTransaction interbankTransaction) {
+        EventDatabaseService.saveEvent(event.getRentalId(), "end");
+        PaymentTransactionDatabaseService.savePaymentTransaction(event.getRentalId(), (long) interbankTransaction.getAmount(), interbankTransaction.getCommand());
         BikeDatabaseService.updateBikeParkAndStatus(bike_id, park_id);
     }
 }

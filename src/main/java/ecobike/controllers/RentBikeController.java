@@ -5,8 +5,7 @@ import ecobike.database_services.CardDatabaseService;
 import ecobike.database_services.EventDatabaseService;
 import ecobike.database_services.PaymentTransactionDatabaseService;
 import ecobike.database_services.RentalDatabaseService;
-import ecobike.entities.Card;
-import ecobike.entities.ParkingLot;
+import ecobike.entities.*;
 import ecobike.subsystems.barcode_subsystem.BarcodeConverterController;
 import ecobike.subsystems.interbank_subsystem.IInterbank;
 import ecobike.subsystems.interbank_subsystem.InterbankController;
@@ -15,6 +14,7 @@ import ecobike.views.Main;
 import ecobike.views.box.ConfirmBox;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -97,22 +97,24 @@ public class RentBikeController {
         return cardCurrentlyOnRental;
     }
 
-    public String handlePayment(String cardCode, String owner, String cvv, String amount, String expiredDate) {
+    public String handlePayment(Card card, String amount) {
         try {
             SimpleDateFormat fromUser = new SimpleDateFormat(INPUT_DATE_FORMAT);
             SimpleDateFormat myFormat = new SimpleDateFormat(OUTPUT_DATE_FORMAT);
-            expiredDate = myFormat.format(fromUser.parse(expiredDate));
+            String expiredDate = myFormat.format(fromUser.parse(card.getExpiredDate()));
 
             IInterbank interbank = new InterbankController();
-            Card card = new Card(cardCode, owner, cvv, expiredDate);
-            String respondCode = interbank.processTransaction(card, Integer.parseInt(amount), "deposit", "Refund transaction");
+            InterbankTransaction interbankTransaction = new InterbankTransaction(card, "deposit", "Deposit transaction", Integer.parseInt(amount), LocalDateTime.now());
+            String respondCode = interbank.processTransaction(interbankTransaction);
 
             if (respondCode.equals("00")) {
-                CardDatabaseService.saveCardInfo(cardCode, owner, cvv, expiredDate);
-                RentalDatabaseService.saveRental(Integer.toString(Main.user_id), bikeID, cardCode);
+                CardDatabaseService.saveCardInfo(card.getCardCode(), card.getOwner(), card.getCVV(), card.getExpiredDate());
+                RentalDatabaseService.saveRental(Integer.toString(Main.user_id), bikeID, card.getCardCode());
                 String rentalID = RentalDatabaseService.getLastestRentalID();
-                EventDatabaseService.saveEvent(rentalID, "start");
-                PaymentTransactionDatabaseService.savePaymentTransaction(rentalID, Integer.parseInt(amount), "deposit");
+                Rental rental = new Rental(rentalID, bikeID, card.getCardCode());
+                Event event = new Event(rentalID, LocalDateTime.now(), "start");
+                EventDatabaseService.saveEvent(event.getRentalId(), event.getType());
+                PaymentTransactionDatabaseService.savePaymentTransaction(event.getRentalId(), (long) interbankTransaction.getAmount(), interbankTransaction.getCommand());
                 BikeDatabaseService.updateBikeRentalStatus(bikeID, "1");
             }
             return respondCode;

@@ -3,24 +3,14 @@ package ecobike.entities;
 import java.time.LocalDateTime;
 
 public class Event {
-    private String id;
     private String rentalId;
     private LocalDateTime time;
     private String type;
 
-    public Event(String id, String rentalId, LocalDateTime time, String type) {
-        this.id = id;
+    public Event(String rentalId, LocalDateTime time, String type) {
         this.rentalId = rentalId;
         this.time = time;
         this.type = type;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getRentalId() {
