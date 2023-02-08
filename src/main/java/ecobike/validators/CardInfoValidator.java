@@ -1,6 +1,7 @@
 package ecobike.validators;
 
 import ecobike.entities.Card;
+import org.junit.Test;
 
 import java.time.LocalDate;
 
@@ -14,7 +15,7 @@ public class CardInfoValidator {
     public static boolean validateCvv(String cvv){
         return true;
     }
-    public static boolean valdateExpireDate(LocalDate expireDate){
+    public static boolean validateExpireDate(LocalDate expireDate){
         return true;
     }
 

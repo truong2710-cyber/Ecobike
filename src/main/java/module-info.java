@@ -7,6 +7,7 @@ module ecobike.views {
     requires java.xml.bind;
     requires com.fasterxml.jackson.databind;
     requires java.sql;
+    requires junit;
 
 
     //opens ecobike.ecobikesystem to javafx.fxml;

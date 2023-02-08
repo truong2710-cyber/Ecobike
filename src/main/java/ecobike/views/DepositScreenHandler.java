@@ -56,7 +56,7 @@ public class DepositScreenHandler implements Initializable {
             //NotificationBox.display("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
             return;
         }
-        if (!(CardInfoValidator.validateCardCode(text1.getText()) && CardInfoValidator.validateOwner(text2.getText()) && CardInfoValidator.validateCvv(text3.getText()) && CardInfoValidator.valdateExpireDate(datePicker.getValue()))){
+        if (!(CardInfoValidator.validateCardCode(text1.getText()) && CardInfoValidator.validateOwner(text2.getText()) && CardInfoValidator.validateCvv(text3.getText()) && CardInfoValidator.validateExpireDate(datePicker.getValue()))){
             ErrorBox.show("Error", "Thông tin thẻ không hợp lệ!");
             return;
         }
