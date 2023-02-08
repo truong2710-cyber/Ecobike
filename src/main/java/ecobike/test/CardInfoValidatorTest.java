@@ -1,24 +1,29 @@
 package ecobike.test;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CardInfoValidatorTest {
+public class CardInfoValidatorTest {
 
     @Test
-    void validateCardCode() {
+    public void validateCardCode() {
+        Assertions.assertEquals(1,1);
     }
 
     @Test
-    void validateOwner() {
+    public void validateOwner() {
+        Assertions.assertEquals(1,1);
     }
 
     @Test
-    void validateCvv() {
+    public void validateCvv() {
+        Assertions.assertEquals(1,1);
     }
 
     @Test
-    void validateExpireDate() {
+    public void validateExpireDate() {
+        Assertions.assertEquals(1,1);
     }
 }
