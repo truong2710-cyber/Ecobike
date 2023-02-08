@@ -1,16 +1,21 @@
-package ecobike.test;
+package validators;
 
+import junitparams.FileParameters;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import junitparams.JUnitParamsRunner;
+import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 
-import static org.junit.jupiter.api.Assertions.*;
 
+@RunWith(JUnitParamsRunner.class)
 public class CardInfoValidatorTest {
-
     @Test
-    public void validateCardCode() {
+    @FileParameters("src/test/resources/cardCode.csv")
+    public void validateCardCode(String cardCode, String expected) {
+        //boolean check = CardInfoValidator
         Assertions.assertEquals(1,1);
-    }
+}
 
     @Test
     public void validateOwner() {
@@ -27,3 +32,4 @@ public class CardInfoValidatorTest {
         Assertions.assertEquals(1,1);
     }
 }
+

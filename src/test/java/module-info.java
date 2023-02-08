@@ -1,4 +1,4 @@
-module ecobike.views {
+module validators{
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
@@ -9,8 +9,7 @@ module ecobike.views {
     requires java.sql;
     requires junit;
     requires org.junit.jupiter.api;
+    requires JUnitParams;
 
-    opens ecobike.views to javafx.fxml;
-    exports ecobike.views;
-    exports ecobike.validators;
+    exports validators;
 }
