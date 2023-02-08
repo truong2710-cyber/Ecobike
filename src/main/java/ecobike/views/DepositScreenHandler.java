@@ -3,6 +3,7 @@ package ecobike.views;
 import ecobike.controllers.RentBikeController;
 import ecobike.controllers.ViewBikeController;
 import ecobike.entities.Card;
+import ecobike.validators.CardInfoValidator;
 import ecobike.views.box.ErrorBox;
 import ecobike.views.box.TransactionInfoNotiBox;
 import javafx.fxml.FXML;
@@ -53,6 +54,10 @@ public class DepositScreenHandler implements Initializable {
         if (rentBikeController.checkCardOnRental(text1.getText())){
             ErrorBox.show("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
             //NotificationBox.display("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
+            return;
+        }
+        if (!(CardInfoValidator.validateCardCode(text1.getText()) && CardInfoValidator.validateOwner(text2.getText()) && CardInfoValidator.validateCvv(text3.getText()) && CardInfoValidator.valdateExpireDate(datePicker.getValue()))){
+            ErrorBox.show("Error", "Thông tin thẻ không hợp lệ!");
             return;
         }
         Card card = new Card(text1.getText(), text2.getText(), text3.getText(), datePicker.getValue());
