@@ -10,9 +10,7 @@ module ecobike.views {
     requires junit;
     requires org.junit.jupiter.api;
 
-
-    //opens ecobike.ecobikesystem to javafx.fxml;
-    //exports ecobike.ecobikesystem;
     opens ecobike.views to javafx.fxml;
     exports ecobike.views;
+    exports ecobike.test;
 }
