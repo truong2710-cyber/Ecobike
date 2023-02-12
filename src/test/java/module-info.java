@@ -15,4 +15,6 @@ module test.java.ecobike.validators{
 
     exports ecobike.validators_test;
     exports ecobike.calculator_test;
+    exports ecobike.controllers_test;
+    exports ecobike.subsystems_test.barcode_subsystem_test;
 }

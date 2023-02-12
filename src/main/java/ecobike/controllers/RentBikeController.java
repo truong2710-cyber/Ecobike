@@ -9,6 +9,7 @@ import ecobike.entities.*;
 import ecobike.subsystems.barcode_subsystem.BarcodeConverterController;
 import ecobike.subsystems.interbank_subsystem.IInterbank;
 import ecobike.subsystems.interbank_subsystem.InterbankController;
+import ecobike.validators.BarcodeValidator;
 import ecobike.views.box.ErrorBox;
 import ecobike.views.Main;
 import ecobike.views.box.ConfirmBox;
@@ -45,17 +46,16 @@ public class RentBikeController {
         boolean RentConfirmation = false;
         if (barcode.isEmpty()) {
             ErrorBox.show("Error", "Bạn chưa nhập barcode!");
-            //NotificationBox.display("NotificationBox", "Vui lòng nhập barcode!");
+        } else if (!BarcodeValidator.validateBarcode(barcode)) {
+            ErrorBox.show("Error", "Barcode không hợp lệ!");
         } else {
             int bikecode = barcodeConverterController.convertBarcodeToBikeCode(barcode);
             bikeID = String.valueOf(bikecode);
             ArrayList<ArrayList<String>> bikes = BikeDatabaseService.getAllBikesByID(bikeID);
             if (bikes.isEmpty()) {
                 ErrorBox.show("Error", "Xe này không tồn tại!");
-                //NotificationBox.display("NotificationBox", "Xe này không tồn tại!");
             } else if (bikes.get(0).get(12).equals("1")) {
                 ErrorBox.show("Error", "Xe này đang được thuê rồi!");
-                //NotificationBox.display("NotificationBox", "Xe này đang được thuê rồi!");
             } else {
                 if (bikes.get(0).get(11).equals(parkingLot.getID())) {
                     RentConfirmation = ConfirmBox.show("ConfirmBox", "Bạn có chắc chắn muốn thê xe có mã " + barcode + " không ạ?");

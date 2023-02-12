@@ -14,4 +14,6 @@ module src.java.ecobike.views {
     exports ecobike.views;
     exports ecobike.validators;
     exports ecobike.calculator;
+    exports ecobike.controllers;
+    exports ecobike.subsystems.barcode_subsystem;
 }
