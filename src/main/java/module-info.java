@@ -13,4 +13,5 @@ module src.java.ecobike.views {
     opens ecobike.views to javafx.fxml;
     exports ecobike.views;
     exports ecobike.validators;
+    exports ecobike.calculator;
 }

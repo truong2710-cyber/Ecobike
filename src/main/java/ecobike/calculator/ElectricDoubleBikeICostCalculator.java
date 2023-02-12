@@ -8,12 +8,12 @@ public class ElectricDoubleBikeICostCalculator implements ICostCalculator {
             return 0;
         }
 
-        // 15,000VND for the first 30 minutes
-        int cost = 15000;
+        // 20,000VND for the first 30 minutes
+        int cost = 20000;
         duration -= 30;
         if (duration <= 0) return cost;
         int period = (int) Math.ceil(duration / 15.0);
-        cost += period * 4500;
+        cost += period * 6000;
         return cost;
     }
 }

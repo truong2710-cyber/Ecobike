@@ -8,7 +8,7 @@ public class SingleBikeICostCalculator implements ICostCalculator {
             return 0;
         }
 
-        // 15,000VND for the first 30 minutes
+        // 10,000VND for the first 30 minutes
         int cost = 10000;
         duration -= 30;
         if (duration <= 0) return cost;

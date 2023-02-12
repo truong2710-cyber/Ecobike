@@ -14,4 +14,5 @@ module test.java.ecobike.validators{
     //requires ecobike.views;
 
     exports ecobike.validators_test;
+    exports ecobike.calculator_test;
 }
