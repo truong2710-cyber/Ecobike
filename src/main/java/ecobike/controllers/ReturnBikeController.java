@@ -43,7 +43,7 @@ public class ReturnBikeController {
     }
 
     public static void saveReturnTransaction(String park_id, int bike_id, Event event, InterbankTransaction interbankTransaction) {
-        EventDatabaseService.saveEvent(event.getRentalId(), "end");
+        EventDatabaseService.saveEvent(event.getRentalId(), event.getType());
         PaymentTransactionDatabaseService.savePaymentTransaction(event.getRentalId(), (long) interbankTransaction.getAmount(), interbankTransaction.getCommand());
         BikeDatabaseService.updateBikeParkAndStatus(bike_id, park_id);
     }
