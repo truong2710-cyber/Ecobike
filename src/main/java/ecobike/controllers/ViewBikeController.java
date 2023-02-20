@@ -2,7 +2,7 @@ package ecobike.controllers;
 
 import ecobike.database_services.EventDatabaseService;
 import ecobike.database_services.RentalDatabaseService;
-import ecobike.entities.Bike;
+import ecobike.entities.*;
 import ecobike.calculator.CostCalculatorBoundary;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -76,25 +76,32 @@ public class ViewBikeController {
         });
     }
 
-    public static String getImageURL(Bike bike) {
-        switch (bike.getType()) {
-            case "single" -> {
-                return "/ecobike/single_bike.jpg";
-            }
-            case "double" -> {
-                return "/ecobike/double_bike.jpg";
-            }
-            case "electric single" -> {
-                return "/ecobike/single_electric.jpg";
+//    public static String getImageURL(Bike bike) {
+//        switch (bike.getType()) {
+//            case "single" -> {
+//                return "/ecobike/single_bike.jpg";
+//            }
+//            case "double" -> {
+//                return "/ecobike/double_bike.jpg";
+//            }
+//            case "electric single" -> {
+//                return "/ecobike/single_electric.jpg";
+//
+//            }
+//            case "electric double" -> {
+//                return "/ecobike/double_electric.png";
+//            }
+//        }
+//        return "";
+//    }
 
-            }
-            case "electric double" -> {
-                return "/ecobike/double_electric.png";
-            }
-        }
+    public static String getImageURL(Bike bike) {
+        if (bike instanceof SingleBike) return "/ecobike/single_bike.jpg";
+        else if (bike instanceof DoubleBike) return "/ecobike/double_bike.jpg";
+        else if (bike instanceof ElectricSingleBike) return "/ecobike/single_electric.jpg";
+        else if (bike instanceof ElectricDoubleBike) return "/ecobike/double_electric.png";
         return "";
     }
-
     public static void setupButton(Button button) {
         button.setOnMouseEntered(e -> button.setStyle("-fx-background-color : #c99513; -fx-background-radius: 20"));
         button.setOnMouseExited(e -> button.setStyle("-fx-background-color :  #bec913; -fx-background-radius: 20"));

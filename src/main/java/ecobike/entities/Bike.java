@@ -1,8 +1,8 @@
 package ecobike.entities;
 
-public class Bike {
+public abstract class Bike {
     protected int bikeCode;
-    protected String type;
+    // protected String type;
     protected String name;
     protected String country;
     protected String dateOfManufacture;
@@ -12,9 +12,9 @@ public class Bike {
     protected int slotId;
     protected int parkId;
     protected boolean isRented;
-    public Bike(int bikeCode, String type, String name, String country, String dateOfManufacture, String color, int price, String licensePlateNumber, int slotId, int parkId, boolean isRented) {
+    public Bike(int bikeCode, String name, String country, String dateOfManufacture, String color, int price, String licensePlateNumber, int slotId, int parkId, boolean isRented) {
         this.bikeCode = bikeCode;
-        this.type = type;
+        // this.type = type;
         this.name = name;
         this.country = country;
         this.dateOfManufacture = dateOfManufacture;
@@ -33,13 +33,11 @@ public class Bike {
         this.bikeCode = bikeCode;
     }
 
-    public String getType() {
-        return type;
-    }
+    public abstract String getType();
 
-    public void setType(String type) {
-        this.type = type;
-    }
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
     public String getName() {
         return name;
@@ -122,7 +120,6 @@ public class Bike {
             return "X0"+bikeCode%100;
         return "X"+ bikeCode%100;
     }
-    public String getGeneralInfo(){
-        return getLicensePlateNumber() + " - " + getType();
-    }
+    public abstract String getGeneralInfo();
 }
+//return getLicensePlateNumber() + " - " + getType();
