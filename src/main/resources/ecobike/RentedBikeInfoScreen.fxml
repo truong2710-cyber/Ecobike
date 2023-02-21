@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecobike.views.RentedBikeInfoScreenHandler">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ecobike.views.RentedBikeInfoScreenHandler">
    <children>
       <AnchorPane layoutX="-2.0" prefHeight="80.0" prefWidth="900.0" style="-fx-border-color: #ddd;">
          <children>
@@ -55,17 +48,17 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="parkingLot" GridPane.columnIndex="1">
+            <TextField fx:id="parkingLot" editable="false" GridPane.columnIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField fx:id="deposit" prefHeight="40.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="deposit" editable="false" prefHeight="40.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField fx:id="cost" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="cost" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
@@ -98,7 +91,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="rentedTime" prefWidth="239.0" GridPane.columnIndex="1">
+            <TextField fx:id="rentedTime" editable="false" prefWidth="239.0" GridPane.columnIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
@@ -108,7 +101,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="totalFee" prefHeight="37.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="totalFee" editable="false" prefHeight="37.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
@@ -118,7 +111,7 @@
             </TextField>
          </children>
       </GridPane>
-      <TextArea fx:id="extraInfo" layoutX="463.0" layoutY="396.0" prefHeight="103.0" prefWidth="403.0">
+      <TextArea fx:id="extraInfo" editable="false" layoutX="463.0" layoutY="396.0" prefHeight="103.0" prefWidth="403.0">
          <font>
             <Font size="20.0" />
          </font>
