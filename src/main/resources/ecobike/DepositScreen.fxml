@@ -11,7 +11,7 @@
          <children>
             <Pane prefHeight="401.0" prefWidth="599.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <GridPane layoutX="32.0" layoutY="102.0" prefHeight="250.0" prefWidth="536.0">
+                  <GridPane layoutX="32.0" layoutY="102.0" prefHeight="250.0" prefWidth="503.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.199951171875" minWidth="10.0" prefWidth="197.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.60001831054694" minWidth="10.0" prefWidth="339.0" />
@@ -29,7 +29,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text1" prefHeight="46.0" prefWidth="318.0" GridPane.columnIndex="1">
+                        <TextField fx:id="text1" prefHeight="21.0" prefWidth="339.0" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
@@ -38,7 +38,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text2" prefHeight="42.0" prefWidth="425.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="text2" prefHeight="23.0" prefWidth="322.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
@@ -47,10 +47,6 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="text3" prefHeight="46.0" prefWidth="330.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font></TextField>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày hết hạn:" GridPane.rowIndex="3">
                            <font>
                               <Font name="System Bold" size="24.0" />
@@ -66,8 +62,11 @@
                               <Font name="System Bold" size="24.0" />
                            </font></TextField>
                         <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <PasswordField fx:id="text3" prefHeight="50.0" prefWidth="293.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="passText" prefHeight="60.0" prefWidth="322.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
+                  <CheckBox fx:id="checkBox" layoutX="552.0" layoutY="219.0" mnemonicParsing="false" onAction="#showPassword" prefWidth="17.0" />
                </children></Pane>
             <Pane fx:id="imagePane" prefHeight="400.0" prefWidth="241.0" style="-fx-background-color: #ffffff;">
                <children>

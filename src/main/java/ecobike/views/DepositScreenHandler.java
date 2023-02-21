@@ -6,11 +6,10 @@ import ecobike.entities.Card;
 import ecobike.validators.CardInfoValidator;
 import ecobike.views.box.ErrorBox;
 import ecobike.views.box.TransactionInfoNotiBox;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -18,10 +17,13 @@ import java.util.ResourceBundle;
 
 public class DepositScreenHandler implements Initializable {
     @FXML
-    private TextField text1, text2, text3, text4;
-
+    private TextField text1, text2, text4, passText;
+    @FXML
+    private PasswordField text3;
     @FXML
     private DatePicker datePicker;
+    @FXML
+    private CheckBox checkBox;
 
     String bikeID;
 
@@ -32,6 +34,7 @@ public class DepositScreenHandler implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ViewBikeController.setupButton(huy);
         ViewBikeController.setupButton(xacnhan);
+        this.showPassword(null);
     }
 
     public String getBikeID() {
@@ -56,11 +59,11 @@ public class DepositScreenHandler implements Initializable {
             //NotificationBox.display("Error", "Thẻ đang được sử dụng trong giao dịch thuê khác!");
             return;
         }
-        if (!(CardInfoValidator.validateCardCode(text1.getText()) && CardInfoValidator.validateOwner(text2.getText()) && CardInfoValidator.validateCvv(text3.getText()) && CardInfoValidator.validateExpireDate(datePicker.getValue()))){
+        if (!(CardInfoValidator.validateCardCode(text1.getText()) && CardInfoValidator.validateOwner(text2.getText()) && CardInfoValidator.validateCvv(getPasswordValue()) && CardInfoValidator.validateExpireDate(datePicker.getValue()))){
             ErrorBox.show("Error", "Thông tin thẻ không hợp lệ!");
             return;
         }
-        Card card = new Card(text1.getText(), text2.getText(), text3.getText(), datePicker.getValue());
+        Card card = new Card(text1.getText(), text2.getText(), getPasswordValue(), datePicker.getValue());
         String amount = text4.getText();
         String respondCode = rentBikeController.handlePayment(card, amount);
         TransactionInfoNotiBox.displayNotificationErrorCode(respondCode, "deposit");
@@ -71,4 +74,23 @@ public class DepositScreenHandler implements Initializable {
         Stage stage = (Stage) huy.getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    public void showPassword(ActionEvent event){
+        if (checkBox.isSelected()) {
+            passText.setText(text3.getText());
+            passText.setVisible(true);
+            text3.setVisible(false);
+            return;
+        }
+        text3.setText(passText.getText());
+        text3.setVisible(true);
+        passText.setVisible(false);
+    }
+
+    private String getPasswordValue() {
+        return checkBox.isSelected()?
+                passText.getText(): text3.getText();
+    }
+
 }
