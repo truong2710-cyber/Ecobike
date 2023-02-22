@@ -35,10 +35,6 @@ public abstract class Bike {
 
     public abstract String getType();
 
-//    public void setType(String type) {
-//        this.type = type;
-//    }
-
     public String getName() {
         return name;
     }
@@ -115,11 +111,5 @@ public abstract class Bike {
         return 4 * getPrice() / 10;
     }
 
-    public String convertBikeCodeToBarCode(int bikeCode){
-        if (bikeCode%100<10)
-            return "X0"+bikeCode%100;
-        return "X"+ bikeCode%100;
-    }
     public abstract String getGeneralInfo();
 }
-//return getLicensePlateNumber() + " - " + getType();
